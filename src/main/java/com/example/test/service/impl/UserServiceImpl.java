@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.dao.UserDao;
+import com.example.test.dao.StudentDao;
 import com.example.test.domain.Student;
 import com.example.test.service.UserService;
 import com.example.test.util.MD5Util;
@@ -17,7 +17,7 @@ import com.example.test.util.MD5Util;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserDao userDao;
+	StudentDao userDao;
 	
 	public List<Student> find(Student user) {
 		// TODO Auto-generated method stub
