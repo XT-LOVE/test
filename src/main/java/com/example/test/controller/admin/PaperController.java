@@ -188,7 +188,6 @@ public class PaperController {
 		int selNum=0;
 		int inpNum=0;
 		int desNum=0;
-		int tmp = 0;
 		if(quesId != null){
 			String ids[] = quesId.split(",");
 			for(int i=0;i<ids.length;i++){

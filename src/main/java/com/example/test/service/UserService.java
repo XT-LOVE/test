@@ -5,23 +5,22 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Question;
-import com.example.test.domain.User;
+import com.example.test.domain.Student;
 
 public interface UserService {
-	public List<User> find(User user);
+	public List<Student> find(Student user);
 	/**查询所有待审核记录*/
-	public List<User> findPending(User user);
-	public User get(Serializable id);
-	public void insert(User user);
-	public void update(User user);
+	public List<Student> findPending(Student user);
+	public Student get(Serializable id);
+	public void insert(Student user);
+	public void update(Student user);
 	public void delete(Serializable id);
 	public void delete(Serializable[] ids);
-	public User login(User user);
+	public Student login(Student user);
 	/**查询学生信息*/
-	public User getStu(User user);
+	public Student getStu(Student user);
 	/**分页查询学生信息*/
-	public PageInfo<User> findByPage(User user, Integer pageNo,Integer pageSize);
+	public PageInfo<Student> findByPage(Student user, Integer pageNo, Integer pageSize);
 	/**分页查询待审核记录*/
-	public PageInfo<User> findPendingByPage(User user, Integer pageNo,Integer pageSize);
+	public PageInfo<Student> findPendingByPage(Student user, Integer pageNo, Integer pageSize);
 }

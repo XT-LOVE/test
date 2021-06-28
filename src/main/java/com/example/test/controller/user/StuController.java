@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.test.domain.User;
+import com.example.test.domain.Student;
 import com.example.test.service.UserService;
 
 @Controller
@@ -20,14 +20,14 @@ public class StuController {
 	UserService userService;
 	//跳转到前台登录页面
 	@RequestMapping("/toLogin.action")
-	public String toUserLogin(User user, Model model, HttpSession session){
+	public String toUserLogin(Student user, Model model, HttpSession session){
 		if(session.getAttribute("userName")!= null){
 			return "/user/index.jsp";
 		}
 		if(session.getAttribute("user")== null){
 			session.setAttribute("user", userService.get(user.getUserId()));
 		}
-		List<User> dataList = userService.find(user);
+		List<Student> dataList = userService.find(user);
 		model.addAttribute("dataList", dataList);
 		return "/user/login.jsp";			
 	}
@@ -40,7 +40,7 @@ public class StuController {
 	 * @return
 	 */
 	@RequestMapping("/user/toIndex.action")
-	public String toIndex(User user, Model model, HttpSession session){
+	public String toIndex(Student user, Model model, HttpSession session){
 		if(session.getAttribute("userName")!= null){
 			return "/user/index.jsp";
 		}else{
@@ -57,9 +57,9 @@ public class StuController {
 	 */
 	@RequestMapping("/checkPwd.action")
 	@ResponseBody
-	public MsgItem checkPwd(User user, Model model, HttpSession session){
+	public MsgItem checkPwd(Student user, Model model, HttpSession session){
 		MsgItem item = new MsgItem();
-		User loginUser = userService.login(user);
+		Student loginUser = userService.login(user);
 		if(loginUser!=null && loginUser.getUserType() ==0){
 			if(loginUser.getUserState()==0 ){
 				item.setErrorNo("1");
@@ -89,15 +89,15 @@ public class StuController {
 	 * @return
 	 */
 	@RequestMapping("/addUserInfo.action")
-	public String addUserInfo(User user, Model model, HttpSession session){
+	public String addUserInfo(Student user, Model model, HttpSession session){
 		userService.insert(user);
 		return "redirect:/toLogin.action";			
 	}
 	
 	//跳转到前台登录页面
 	@RequestMapping("/toUserInfo.action")
-	public String toUserInfo(User user, Model model, HttpSession session){
-		User loginUser = (User) session.getAttribute("user");
+	public String toUserInfo(Student user, Model model, HttpSession session){
+		Student loginUser = (Student) session.getAttribute("user");
 		user = userService.getStu(loginUser);
 		model.addAttribute("user", user);
 		return "/user/userinfo.jsp";			
@@ -111,7 +111,7 @@ public class StuController {
 	 * @return
 	 */
 	@RequestMapping("/updateUserInfo.action")
-	public String updateUserInfo(String newPwd,User user, Model model, HttpSession session){
+	public String updateUserInfo(String newPwd, Student user, Model model, HttpSession session){
 		if(newPwd!= null && newPwd.trim().length()>0){
 			user.setUserPwd(newPwd);
 		}
@@ -125,7 +125,7 @@ public class StuController {
 	
 	//跳转到登录页面
 	@RequestMapping("/user/exitSys.action")
-	public String exitSystem(User user, Model model, HttpSession session){
+	public String exitSystem(Student user, Model model, HttpSession session){
 		if(session.getAttribute("userName")!= null){
 			session.removeAttribute("userName");
 			return "/user/login.jsp";
@@ -135,8 +135,8 @@ public class StuController {
 	
 	//跳转到前台登录页面
 	@RequestMapping("/toAbout.action")
-	public String toAbout(User user, Model model, HttpSession session){
-		User loginUser = (User) session.getAttribute("user");
+	public String toAbout(Student user, Model model, HttpSession session){
+		Student loginUser = (Student) session.getAttribute("user");
 		model.addAttribute("user", loginUser);
 		return "/user/about.jsp";			
 	}

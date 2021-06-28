@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.controller.BaseController;
-import com.example.test.domain.User;
+import com.example.test.domain.Student;
 import com.example.test.service.UserService;
 /**
  * 用户管理
@@ -31,18 +31,18 @@ public class UserController extends BaseController{
 	UserService userService;
 	//跳转到登录页面
 	@RequestMapping("/admin/login.action")
-	public String toLoin(User user, Model model, HttpSession session){
+	public String toLoin(Student user, Model model, HttpSession session){
 		if(session.getAttribute("userName")!= null){
 			return "/admin/index.jsp";
 		}
-		List<User> dataList = userService.find(user);
+		List<Student> dataList = userService.find(user);
 		model.addAttribute("dataList", dataList);
 		return "/admin/login.jsp";			
 	}
 	
 	@RequestMapping("/admin/userLogin.action")
-	public String checkUser(User user, Model model, HttpSession session){
-		User loginUser = userService.login(user);
+	public String checkUser(Student user, Model model, HttpSession session){
+		Student loginUser = userService.login(user);
 		
 		if(session.getAttribute("userName")!= null){
 			return "/admin/index.jsp";
@@ -65,7 +65,7 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping("/admin/checkAccount.action")
 	public String checkAccount(String userId, Model model){
-		User userInfo = userService.get(userId);
+		Student userInfo = userService.get(userId);
 		if(userInfo!= null){
 			model.addAttribute("message", "该账号已经存在");
 		}else{
@@ -85,7 +85,7 @@ public class UserController extends BaseController{
 	@ResponseBody
 	public MsgItem userRegist(String userId, Model model, HttpSession session){
 		MsgItem msgItem = new MsgItem();
-		User user = userService.get(userId);
+		Student user = userService.get(userId);
 		if(user!=null){
 			msgItem.setErrorNo("1");
 			msgItem.setErrorInfo("账号已经存在");
@@ -98,7 +98,7 @@ public class UserController extends BaseController{
 	
 	//跳转到登录页面
 	@RequestMapping("/admin/exitSys.action")
-	public String exitSys(User user, Model model, HttpSession session){
+	public String exitSys(Student user, Model model, HttpSession session){
 		if(session.getAttribute("userName")!= null){
 			session.removeAttribute("userName");
 			return "forward:/admin/login.action";
@@ -115,10 +115,10 @@ public class UserController extends BaseController{
 	//获取所有的用户信息
 	@RequestMapping("/admin/getAllUser.action")
 	public String getAllUserInfo(@RequestParam(value="page", defaultValue="1") int page,
-			User user, Model model, HttpSession session){
+								 Student user, Model model, HttpSession session){
 //		List<User> dataList = userService.find(user);
-		PageInfo<User> pageInfo = userService.findByPage(user, page, 5);
-		List<User> dataList = pageInfo.getList();
+		PageInfo<Student> pageInfo = userService.findByPage(user, page, 5);
+		List<Student> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "/admin/info-mgt.jsp";			
@@ -127,11 +127,11 @@ public class UserController extends BaseController{
 	//获取所有的用户信息
 	@RequestMapping("/admin/qryAllUser.action")
 	@ResponseBody
-	public List<User> qryAllUser(@RequestParam(value="page", defaultValue="1") int page,
-			User user, Model model, HttpSession session){
+	public List<Student> qryAllUser(@RequestParam(value="page", defaultValue="1") int page,
+									Student user, Model model, HttpSession session){
 //			List<User> dataList = userService.find(user);
-		PageInfo<User> pageInfo = userService.findByPage(user, page, 5);
-		List<User> dataList = pageInfo.getList();
+		PageInfo<Student> pageInfo = userService.findByPage(user, page, 5);
+		List<Student> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return dataList;			
@@ -145,8 +145,8 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/toAddUser.action")
-	public String toAddUserInfo(User user, Model model, HttpSession session){
-		List<User> dataList = userService.find(user);
+	public String toAddUserInfo(Student user, Model model, HttpSession session){
+		List<Student> dataList = userService.find(user);
 		model.addAttribute("dataList", dataList);
 		return "/admin/info-reg.jsp";			
 	}
@@ -158,7 +158,7 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/addUser.action")
-	public String addUser(User user, Model model){
+	public String addUser(Student user, Model model){
 		userService.insert(user);
 		return "redirect:/admin/getAllUser.action";			
 	}
@@ -187,9 +187,9 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/getFindPending.action")
-	public String findPending(@RequestParam(value="page", defaultValue="1") int page,User user, Model model){
-		PageInfo<User> pageInfo = userService.findPendingByPage(user, page, 5);
-		List<User> dataList = pageInfo.getList();
+	public String findPending(@RequestParam(value="page", defaultValue="1") int page, Student user, Model model){
+		PageInfo<Student> pageInfo = userService.findPendingByPage(user, page, 5);
+		List<Student> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "/admin/info-deal.jsp";
@@ -198,11 +198,11 @@ public class UserController extends BaseController{
 	//获取所有的用户信息
 	@RequestMapping("/admin/qryFindPending.action")
 	@ResponseBody
-	public List<User> qryFindPending(@RequestParam(value="page", defaultValue="1") int page,
-			User user, Model model, HttpSession session){
+	public List<Student> qryFindPending(@RequestParam(value="page", defaultValue="1") int page,
+										Student user, Model model, HttpSession session){
 //				List<User> dataList = userService.find(user);
-		PageInfo<User> pageInfo = userService.findPendingByPage(user, page, 5);
-		List<User> dataList = pageInfo.getList();
+		PageInfo<Student> pageInfo = userService.findPendingByPage(user, page, 5);
+		List<Student> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return dataList;			
@@ -215,8 +215,8 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/passinfo.action")
-	public String passUserInfo(User user, Model model){
-		User us = new User();
+	public String passUserInfo(Student user, Model model){
+		Student us = new Student();
 		if(user != null){
 			String ids[] = user.getUserId().split(",");
 			for(int i=0;i<ids.length;i++){
@@ -235,8 +235,8 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/failinfo.action")
-	public String failUserInfo(User user, Model model){
-		User us = new User();
+	public String failUserInfo(Student user, Model model){
+		Student us = new Student();
 		if(user != null){
 			String ids[] = user.getUserId().split(",");
 			for(int i=0;i<ids.length;i++){
@@ -256,9 +256,9 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/toUpdateUser.action")
-	public String toUpdateUser(User user, Model model, HttpSession session){
+	public String toUpdateUser(Student user, Model model, HttpSession session){
 		String userId = user.getUserId().trim();
-		User userInfo = userService.get(userId);
+		Student userInfo = userService.get(userId);
 		model.addAttribute("user", userInfo);
 		return "/admin/info-upd.jsp";			
 	}
@@ -271,9 +271,9 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/toQryUser.action")
-	public String toQryUser(User user, Model model, HttpSession session){
+	public String toQryUser(Student user, Model model, HttpSession session){
 		String userId = user.getUserId().trim();
-		User userInfo = userService.get(userId);
+		Student userInfo = userService.get(userId);
 		model.addAttribute("user", userInfo);
 		return "/admin/info-det.jsp";			
 	}
@@ -286,9 +286,9 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/toQryUserInfo.action")
-	public String toQryUserInfo(User user, Model model, HttpSession session){
+	public String toQryUserInfo(Student user, Model model, HttpSession session){
 		String userId = user.getUserId().trim();
-		User userInfo = userService.get(userId);
+		Student userInfo = userService.get(userId);
 		model.addAttribute("user", userInfo);
 		return "/admin/info-qry.jsp";			
 	}
@@ -301,15 +301,15 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@RequestMapping("/admin/toQryMgUser.action")
-	public String toQryMgUser(User user, Model model, HttpSession session){
+	public String toQryMgUser(Student user, Model model, HttpSession session){
 		String userId = user.getUserId().trim();
-		User userInfo = userService.get(userId);
+		Student userInfo = userService.get(userId);
 		model.addAttribute("user", userInfo);
 		return "/admin/info-qry.jsp";			
 	}
 	
 	@RequestMapping("/admin/updateUser.action")
-	public String updateUser(User user, Model model){
+	public String updateUser(Student user, Model model){
 		userService.update(user);
 		return "redirect:/admin/getAllUser.action";			
 	}

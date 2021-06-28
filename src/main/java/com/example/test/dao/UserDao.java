@@ -2,11 +2,11 @@ package com.example.test.dao;
 
 import java.util.List;
 
-import com.example.test.domain.User;
+import com.example.test.domain.Student;
 
 
-public interface UserDao extends BaseDao<User>{
+public interface UserDao extends BaseDao<Student>{
 
-	public List<User> findPending(User user);
-	public User getStu(User user);
+	public List<Student> findPending(Student user);
+	public Student getStu(Student user);
 }
