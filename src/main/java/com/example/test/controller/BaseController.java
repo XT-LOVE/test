@@ -18,4 +18,7 @@ public abstract class BaseController {
 		dateFormat.setLenient(true);
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
+	public void add(){
+		return;
+	}
 }
