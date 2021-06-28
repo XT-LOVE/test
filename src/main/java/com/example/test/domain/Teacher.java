@@ -67,5 +67,4 @@ public class Teacher {
     public String toString() {
         return super.toString();
     }
-
 }
