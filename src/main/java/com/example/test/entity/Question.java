@@ -1,11 +1,22 @@
 package com.example.test.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="problem")
 public class Question {
 	//习题编号
+	@Id
+	@Column(name = "pro_no")
 	private int questionId;
-	//习题名称
-	private String quesName;
+	//习题内容
+	@Column(name = "pro_detail")
+	private String quesDetail;
 	//习题答案编号
+	@Column(name = "pro_ansno")
 	private int answerId;
 	//关键字
 	private String keyword;
@@ -18,10 +29,10 @@ public class Question {
 
 	public Question() {
 	}
-	public Question(int questionId, String quesName, int answerId, String keyword, int questionDif,
+	public Question(int questionId, String quesDetail, int answerId, String keyword, int questionDif,
 					int ch, String chTitle, String chMPoint, String questionType) {
 		this.questionId = questionId;
-		this.quesName = quesName;
+		this.quesDetail = quesDetail;
 		this.answerId = answerId;
 		this.keyword = keyword;
 		this.questionDif = questionDif;
@@ -41,11 +52,11 @@ public class Question {
 	}
 
 	public String getQuesName() {
-		return quesName;
+		return quesDetail;
 	}
 
-	public void setQuesName(String quesName) {
-		this.quesName = quesName;
+	public void setQuesDetail(String quesDetail) {
+		this.quesDetail = quesDetail;
 	}
 
 	public int getAnswerId() {
@@ -113,7 +124,7 @@ public class Question {
 	public String toString() {
 		return "Question{" +
 				"questionId=" + questionId +
-				", quesName='" + quesName + '\'' +
+				", quesDetail='" + quesDetail + '\'' +
 				", answerId=" + answerId +
 				", keyword='" + keyword + '\'' +
 				", questionDif=" + questionDif +
