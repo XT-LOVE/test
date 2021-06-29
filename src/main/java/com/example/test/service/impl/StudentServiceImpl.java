@@ -11,40 +11,40 @@ import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.StudentDao;
 import com.example.test.entity.Student;
-import com.example.test.service.UserService;
+import com.example.test.service.StudentService;
 import com.example.test.util.MD5Util;
 @Service
-public class UserServiceImpl implements UserService {
+public class StudentServiceImpl implements StudentService {
 
 	@Autowired
-	StudentDao userDao;
+	StudentDao studentDao;
 	
-	public List<Student> find(Student user) {
+	public List<Student> find(Student student) {
 		// TODO Auto-generated method stub
-		return userDao.find(user);
+		return studentDao.find(student);
 	}
 
 	public Student get(Serializable id) {
 		// TODO Auto-generated method stub
-		return userDao.get(id);
+		return studentDao.get(id);
 	}
 
-	public void insert(Student user) {
-		String userPwd = user.getStu_pwd();
+	public void insert(Student student) {
+		String studentPwd = student.getStu_pwd();
 		//密码加密
-		userPwd = MD5Util.getData(userPwd);
-		user.setStu_pwd(userPwd);
-		userDao.insert(user);
+		studentPwd = MD5Util.getData(studentPwd);
+		student.setStu_pwd(studentPwd);
+		studentDao.insert(student);
 	}
 
-	public void update(Student user) {
+	public void update(Student student) {
 		// TODO Auto-generated method stub
-		userDao.update(user);
+		studentDao.update(student);
 	}
 
 	public void delete(Serializable id) {
 		// TODO Auto-generated method stub
-		userDao.delete(id);
+		studentDao.delete(id);
 	}
 
 	public void delete(Serializable[] ids) {
@@ -52,46 +52,46 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
-	public Student login(Student user) {
+	public Student login(Student student) {
 		// TODO Auto-generated method stub
-		Student u = get(user.getStu_no());
+		Student u = get(student.getStu_no());
 		if(u!=null){
-			String userPwd = MD5Util.getData(user.getStu_pwd());
-			if(userPwd.equals(u.getStu_pwd())){
+			String studentPwd = MD5Util.getData(student.getStu_pwd());
+			if(studentPwd.equals(u.getStu_pwd())){
 				return u;
 			}
 		}
 		return null;
 	}
 
-	public List<Student> findPending(Student user) {
+	public List<Student> findPending(Student student) {
 		// TODO Auto-generated method stub
-		return userDao.findPending(user);
+		return StudentDao.findPending(student);
 	}
 
-	public Student getStu(Student user) {
+	public Student getStu(Student student) {
 		// TODO Auto-generated method stub
-		return userDao.getStu(user);
+		return studentDao.getStu(student);
 	}
 
-	public PageInfo<Student> findByPage(Student user, Integer pageNo, Integer pageSize) {
+	public PageInfo<Student> findByPage(Student student, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = userDao.find(user);
+	    List<Student> list = studentDao.find(student);
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Student> page = new PageInfo<Student>(list);
 	    return page;
 	}
 
-	public PageInfo<Student> findPendingByPage(Student user, Integer pageNo,
+	public PageInfo<Student> findPendingByPage(Student student, Integer pageNo,
 											   Integer pageSize) {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = userDao.findPending(user);
+	    List<Student> list = StudentDao.findPending(student);
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Student> page = new PageInfo<Student>(list);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.example.test.dao.ManagerDao;
 import com.example.test.entity.Manager;
 @Repository
-public class ManagerDaoImpl extends BaseDaoImpl<Manager> implements ManagerDao {
+public abstract class ManagerDaoImpl extends BaseDaoImpl<Manager> implements ManagerDao {
     public ManagerDaoImpl() {
         this.setNs("com.example.test.mapper.ManagerMapper.");			//设置命名空间
     }
@@ -16,8 +16,8 @@ public class ManagerDaoImpl extends BaseDaoImpl<Manager> implements ManagerDao {
         return this.getSqlSession().selectList(this.getNs()+"findPending",manager);
     }
 
-    public Manager getStu(Manager manager) {
-        return this.getSqlSession().selectOne(this.getNs()+"getStu",manager);
+    public Manager getMan(Manager manager) {
+        return this.getSqlSession().selectOne(this.getNs()+"getMan",manager);
     }
 
 }

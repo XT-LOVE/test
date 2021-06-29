@@ -7,6 +7,9 @@ import com.example.test.entity.Student;
 
 public interface StudentDao extends BaseDao<Student>{
 
-	public List<Student> findPending(Student student);
+	public static List<Student> findPending(Student student) {
+		return null;
+	}
+
 	public Student getStu(Student student);
 }
