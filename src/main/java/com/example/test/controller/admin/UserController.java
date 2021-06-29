@@ -83,7 +83,7 @@ public class UserController extends BaseController{
 	 */
 	@RequestMapping("/admin/userRegist.action")
 	@ResponseBody
-	public MsgItem userRegist(String userId, Model model, HttpSession session){
+	public  MsgItem userRegist(String userId, Model model, HttpSession session){
 		MsgItem msgItem = new MsgItem();
 		Student user = userService.get(userId);
 		if(user!=null){

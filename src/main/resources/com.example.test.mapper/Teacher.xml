@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.TeacherMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="userRM" type="com.example.test.domain.Teacher">
+		<id property="tea_no" column="tea_no"/>
+		<result property="tea_name" column="tea_name"/>
+		<result property="tea_pwd" column="tea_pwd"/>
+		<result property="tea_discipline" column="tea_discipline"/>
+		<result property="tea_mail" column="tea_mail"/>
+	</resultMap>
+
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.example.test.domain.Teacher">
+		insert into teacher
+			(tea_no,tea_name,tea_pwd,tea_discipline,tea_mail)
+		values
+			(#{tea_no},#{tea_name},#{tea_pwd},#{tea_discipline},#{tea_mail})
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterType="com.example.test.domain.Teacher">
+		update teacher
+		<set>
+			<if test="tea_no!=null">
+				tea_no=#{tea_no},
+			</if>
+			<if test="tea_name!=null">
+				tea_name=#{tea_name},
+			</if>
+			<if test="tea_pwd!=null">
+				tea_pwd=#{tea_pwd},
+			</if>
+			<if test="tea_discipline!=null">
+				tea_discipline=#{tea_discipline},
+			</if>
+			<if test="tea_mail!=null">
+				tea_mail=#{tea_mail},
+			</if>
+		</set>
+		where tea_no=#{tea_no}
+	</update>
+
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="userRM">
+		select * from teacher
+		where 1=1
+		order by tea_no
+	</select>
+
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="com.example.test.domain.Teacher" resultMap="userRM">
+		select * from teacher
+		where tea_no=#{tea_no}
+	</select>
+
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from teacher
+		where tea_no=#{tea_no}
+	</delete>
+
+	<!-- 查询一个录 -->
+	<select id="getTea" parameterType="com.example.test.domain.Teacher" resultMap="userRM">
+		select * from teacher
+		where tea_no=#{tea_no}
+	</select>
+</mapper>

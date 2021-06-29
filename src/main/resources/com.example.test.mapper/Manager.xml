@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.ManagerMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="userRM" type="com.example.test.domain.Manager">
+		<id property="mana_no" column="mana_no"/>
+		<result property="mana_name" column="mana_name"/>
+		<result property="mana_pwd" column="mana_pwd"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.example.test.domain.Manager">
+		insert into manager
+		(mana_no,mana_name,mana_pwd)
+		values
+		(#{mana_no},#{mana_name},#{mana_pwd})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="com.example.test.domain.Manager">
+		update manager
+		<set>
+			<if test="mana_no!=null">
+				mana_no=#{mana_no},
+			</if>
+			<if test="mana_name!=null">
+				mana_name=#{mana_name},
+			</if>
+			<if test="mana_pwd!=null">
+				mana_pwd=#{mana_pwd},
+		</set>
+			where mana_no=#{mana_no}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="userRM">
+		select * from manager
+		where 1=1
+		order by mana_no
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="com.example.test.domain.Manager" resultMap="userRM">
+		select * from manager
+		where mana_no=#{mana_no}
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from manager
+		where mana_no=#{mana_no}
+	</delete>
+	
+	<!-- 查询一个录 -->
+	<select id="getMan" parameterType="com.example.test.domain.Manager" resultMap="userRM">
+		select * from manager
+		where mana_no=#{mana_no}
+	</select>
+</mapper>
