@@ -18,17 +18,17 @@ import com.github.pagehelper.PageInfo;
 
 import com.example.test.controller.BaseController;
 import com.example.test.domain.Student;
-import com.example.test.service.UserService;
+import com.example.test.service.StudentService;
 /**
  * 用户管理
  * @author hspcadmin
  *
  */
 @Controller
-public class UserController extends BaseController{
+public class StudentController extends BaseController{
 
 	@Autowired
-	UserService userService;
+	StudentService studentService;
 	//跳转到登录页面
 	@RequestMapping("/admin/login.action")
 	public String toLoin(Student user, Model model, HttpSession session){
