@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.mapper.StudentMapper">
+
+	<!-- 数据库表映射 -->
+	<resultMap id="userRM" type="com.example.test.domain.Student">
+		<id property="stu_no" column="stu_no"/>
+		<result property="stu_name" column="stu_name"/>
+		<result property="stu_pwd" column="stu_pwd"/>
+		<result property="stu_discipline" column="stu_discipline"/>
+		<result property="stu_grade" column="stu_grade"/>
+	</resultMap>
+	
+	<!-- 新增 -->
+	<insert id="insert" parameterType="com.example.test.domain.Student">
+		insert into student
+		(stu_no,stu_name,stu_pwd,stu_discipline,stu_grade)
+		values
+		(#{stu_no},#{stu_name},#{stu_pwd},#{stu_discipline},#{stu_grade})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="update" parameterType="com.example.test.domain.Student">
+		update student
+		<set>
+			<if test="stu_no!=null">
+				stu_no=#{stu_no},
+			</if>
+			<if test="stu_name!=null">
+				stu_name=#{stu_name},
+			</if>
+			<if test="stu_pwd!=null">
+				stu_pwd=#{stu_pwd},
+			</if>
+			<if test="stu_discipline!=null">
+				stu_discipline=#{stu_discipline},
+			</if>
+			<if test="stu_grade!=null">
+				stu_grade=#{stu_grade},
+			</if>
+		</set>
+			where stu_no=#{stu_no}
+	</update>
+	
+	<!-- 查询所有记录 -->
+	<select id="find" parameterType="string" resultMap="userRM">
+		select * from student
+		where 1=1
+		order by stu_no
+	</select>
+	
+	<!-- 查询一个录 -->
+	<select id="get" parameterType="com.example.test.domain.Student" resultMap="userRM">
+		select * from student
+		where stu_no=#{stu_no}
+	</select>
+	
+	<!-- 删除一条记录 -->
+	<delete id="delete" parameterType="string">
+		delete from student
+		where stu_no=#{stu_no}
+	</delete>
+	
+	<!-- 查询一个录 -->
+	<select id="getStu" parameterType="com.example.test.domain.Student" resultMap="userRM">
+		select * from student
+		where stu_no=#{stu_no}
+	</select>
+</mapper>
