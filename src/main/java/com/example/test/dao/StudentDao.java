@@ -7,6 +7,9 @@ import com.example.test.domain.Student;
 
 public interface StudentDao extends BaseDao<Student>{
 
-	public List<Student> findPending(Student student);
+	public static List<Student> findPending(Student student) {
+		return null;
+	}
+
 	public Student getStu(Student student);
 }

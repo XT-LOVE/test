@@ -16,8 +16,8 @@ public class TeacherDaoImpl extends BaseDaoImpl<Teacher> implements TeacherDao {
         return this.getSqlSession().selectList(this.getNs()+"findPending",teacher);
     }
 
-    public Teacher getStu(Teacher teacher) {
-        return this.getSqlSession().selectOne(this.getNs()+"getStu",teacher);
+    public Teacher getTea(Teacher teacher) {
+        return this.getSqlSession().selectOne(this.getNs()+"getTea",teacher);
     }
 
 }
