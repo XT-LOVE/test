@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.TeacherDao;
-import com.example.test.domain.Teacher;
+import com.example.test.entity.Teacher;
 @Repository
 public class TeacherDaoImpl extends BaseDaoImpl<Teacher> implements TeacherDao {
     public TeacherDaoImpl() {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Question;
+import com.example.test.entity.Question;
 
 public interface QuestionService {
 	public List<Question> find(Question question);

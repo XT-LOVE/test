@@ -1,11 +1,9 @@
 package com.example.test.dao.impl;
 
-import java.io.Serializable;
-
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.TypeDao;
-import com.example.test.domain.Type;
+import com.example.test.entity.Type;
 @Repository
 public class TypeDaoImpl extends BaseDaoImpl<Type> implements TypeDao{
 

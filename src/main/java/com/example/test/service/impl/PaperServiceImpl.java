@@ -11,8 +11,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.PaperDao;
-import com.example.test.domain.Paper;
-import com.example.test.domain.Question;
+import com.example.test.entity.Paper;
 import com.example.test.service.PaperService;
 @Service
 public class PaperServiceImpl implements PaperService {

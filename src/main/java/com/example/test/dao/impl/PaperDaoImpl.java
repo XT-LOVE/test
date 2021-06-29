@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.PaperDao;
-import com.example.test.domain.Paper;
+import com.example.test.entity.Paper;
 @Repository
 public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 	public PaperDaoImpl() {

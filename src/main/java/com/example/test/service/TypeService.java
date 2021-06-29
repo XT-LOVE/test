@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Type;
+import com.example.test.entity.Type;
 
 public interface TypeService {
 	public List<Type> find(Type type);

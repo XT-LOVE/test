@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Type;
+import com.example.test.entity.Type;
 import com.example.test.service.TypeService;
 /**
  * 试题类型管理

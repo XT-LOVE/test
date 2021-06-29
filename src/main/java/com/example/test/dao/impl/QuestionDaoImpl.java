@@ -1,13 +1,12 @@
 package com.example.test.dao.impl;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.QuestionDao;
-import com.example.test.domain.Question;
+import com.example.test.entity.Question;
 @Repository
 public class QuestionDaoImpl extends BaseDaoImpl< Question> implements QuestionDao {
 	public QuestionDaoImpl() {

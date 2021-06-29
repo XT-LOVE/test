@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.test.domain;
+package com.example.test.entity;
 
 /**
  * 学生表

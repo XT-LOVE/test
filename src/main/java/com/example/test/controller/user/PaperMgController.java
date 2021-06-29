@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.test.domain.Paper;
-import com.example.test.domain.Question;
+import com.example.test.entity.Paper;
+import com.example.test.entity.Question;
 import com.example.test.service.PaperService;
 import com.example.test.service.QuestionService;
 import com.example.test.service.UserService;

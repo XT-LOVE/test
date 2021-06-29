@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Student;
+import com.example.test.entity.Student;
 
 public interface UserService {
 	public List<Student> find(Student user);

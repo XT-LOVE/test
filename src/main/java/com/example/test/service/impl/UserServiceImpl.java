@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.StudentDao;
-import com.example.test.domain.Student;
+import com.example.test.entity.Student;
 import com.example.test.service.UserService;
 import com.example.test.util.MD5Util;
 @Service
@@ -30,10 +30,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void insert(Student user) {
-		String userPwd = user.getUserPwd();
+		String userPwd = user.getStu_pwd();
 		//密码加密
 		userPwd = MD5Util.getData(userPwd);
-		user.setUserPwd(userPwd);
+		user.setStu_pwd(userPwd);
 		userDao.insert(user);
 	}
 
@@ -54,10 +54,10 @@ public class UserServiceImpl implements UserService {
 
 	public Student login(Student user) {
 		// TODO Auto-generated method stub
-		Student u = get(user.getUserId());
+		Student u = get(user.getStu_no());
 		if(u!=null){
-			String userPwd = MD5Util.getData(user.getUserPwd());
-			if(userPwd.equals(u.getUserPwd())){
+			String userPwd = MD5Util.getData(user.getStu_pwd());
+			if(userPwd.equals(u.getStu_pwd())){
 				return u;
 			}
 		}

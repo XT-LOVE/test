@@ -1,4 +1,4 @@
-package com.example.test.domain;
+package com.example.test.entity;
 /**
  * 题目类型
  * @author hspcadmin

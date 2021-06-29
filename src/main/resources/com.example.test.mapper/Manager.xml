@@ -5,14 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.example.test.mapper.ManagerMapper">
 
 	<!-- 数据库表映射 -->
-	<resultMap id="userRM" type="com.example.test.domain.Manager">
+	<resultMap id="userRM" type="com.example.test.entity.Manager">
 		<id property="mana_no" column="mana_no"/>
 		<result property="mana_name" column="mana_name"/>
 		<result property="mana_pwd" column="mana_pwd"/>
 	</resultMap>
 	
 	<!-- 新增 -->
-	<insert id="insert" parameterType="com.example.test.domain.Manager">
+	<insert id="insert" parameterType="com.example.test.entity.Manager">
 		insert into manager
 		(mana_no,mana_name,mana_pwd)
 		values
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 修改 -->
-	<update id="update" parameterType="com.example.test.domain.Manager">
+	<update id="update" parameterType="com.example.test.entity.Manager">
 		update manager
 		<set>
 			<if test="mana_no!=null">
@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 查询一个录 -->
-	<select id="get" parameterType="com.example.test.domain.Manager" resultMap="userRM">
+	<select id="get" parameterType="com.example.test.entity.Manager" resultMap="userRM">
 		select * from manager
 		where mana_no=#{mana_no}
 	</select>
@@ -55,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!-- 查询一个录 -->
-	<select id="getMan" parameterType="com.example.test.domain.Manager" resultMap="userRM">
+	<select id="getMan" parameterType="com.example.test.entity.Manager" resultMap="userRM">
 		select * from manager
 		where mana_no=#{mana_no}
 	</select>
