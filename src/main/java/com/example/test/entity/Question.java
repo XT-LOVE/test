@@ -11,7 +11,7 @@ public class Question {
 	//习题编号
 	@Id
 	@Column(name = "pro_no")
-	private int questionId;
+	private int pro_no;
 	//习题内容
 	@Column(name = "pro_detail")
 	private String quesDetail;
@@ -19,19 +19,29 @@ public class Question {
 	@Column(name = "pro_ansno")
 	private int answerId;
 	//关键字
+	@Column(name = "pro_keyw")
 	private String keyword;
 	//难度系数
+	@Column(name = "pro_dif")
 	private int questionDif;
 	//所属章节编号
+	@Column(name = "char_no")
 	private int ch;
 	//所属章节标题
+	@Column(name = "char_title")
 	private String chTitle;
+	//所属章节要点
+	@Column(name = "char_mpoint")
+	private String chMPoint;
+	//习题类型
+	@Column(name = "pro_type")
+	private String questionType;
 
 	public Question() {
 	}
-	public Question(int questionId, String quesDetail, int answerId, String keyword, int questionDif,
+	public Question(int pro_no, String quesDetail, int answerId, String keyword, int questionDif,
 					int ch, String chTitle, String chMPoint, String questionType) {
-		this.questionId = questionId;
+		this.pro_no = pro_no;
 		this.quesDetail = quesDetail;
 		this.answerId = answerId;
 		this.keyword = keyword;
@@ -44,11 +54,15 @@ public class Question {
 
 	//getter & setter
 	public int getQuestionId() {
-		return questionId;
+		return pro_no;
 	}
 
-	public void setQuestionId(int questionId) {
-		this.questionId = questionId;
+	public String getQuesDetail() {
+		return quesDetail;
+	}
+
+	public void setQuestionId(int pro_no) {
+		this.pro_no = pro_no;
 	}
 
 	public String getQuesName() {
@@ -115,15 +129,10 @@ public class Question {
 		this.questionType = questionType;
 	}
 
-	//所属章节要点
-	private String chMPoint;
-	//习题类型
-	private String questionType;
-
 	@Override
 	public String toString() {
 		return "Question{" +
-				"questionId=" + questionId +
+				"pro_no=" + pro_no +
 				", quesDetail='" + quesDetail + '\'' +
 				", answerId=" + answerId +
 				", keyword='" + keyword + '\'' +

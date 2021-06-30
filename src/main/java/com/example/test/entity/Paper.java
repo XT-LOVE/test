@@ -1,27 +1,41 @@
 package com.example.test.entity;
-/**
- * 试卷实体
- * @author hspcadmin
- *
- */
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name="test")
 public class Paper {
 	//试卷编号
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "tst_no",, nullable = false)
 	private String paperId;
 	//试卷名称
+	@Column(name = "tst_name")
 	private String paperName;
 	//创建时间
+	@Column(name = "tst_time")
 	private String createTime;
 	//试卷类型
+	@Column(name = "tst_type")
 	private String paperType;
 	//试卷难度
+	@Column(name = "tst_dif")
 	private int paperDif;
 	//试题数量
+	@Column(name = "tst_num")
 	private int problemNum;
 	//试卷分数
+	@Column(name = "tst_score")
 	private String score;
 	//试卷内容
-	private String paperDetail;
+	@OneToMany(cascade=CascadeType.DETACH,fetch=FetchType.LAZY,targetEntity=Question.class)
+	@JoinColumn(name="pro_no")
+	private List<Question> paperDetail = new ArrayList<>();
 	//试卷负责人
+	@Column(name = "tst_tea")
 	private int teacherId;
 
 	public Paper() {
@@ -128,15 +142,4 @@ public class Paper {
 				", teacherId=" + teacherId +
 				'}';
 	}
-/*
-	@Override
-	public String toString() {
-		return "Paper [paperId=" + paperId + ", paperName=" + paperName
-				+ ", courseId=" + courseId + ", gradeId=" + gradeId
-				+ ", userId=" + userId + ", questionId=" + questionId
-				+ ", beginTime=" + beginTime + ", endTime=" + endTime
-				+ ", allowTime=" + allowTime + ", score=" + score
-				+ ", paperstate=" + paperState + "]";
-	}*/
-
 }
