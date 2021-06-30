@@ -18,9 +18,9 @@ public abstract class ManagerServiceImpl implements ManagerService {
 	@Autowired
 	ManagerDao managerDao;
 	
-	public List<Manager> find(Manager manager) {
+	public List<Manager> find() {
 		// TODO Auto-generated method stub
-		return managerDao.find(manager);
+		return managerDao.find();
 	}
 
 	public Manager get(Serializable id) {
@@ -68,7 +68,7 @@ public abstract class ManagerServiceImpl implements ManagerService {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Manager> list = managerDao.find(manager);
+	    List<Manager> list = managerDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Manager> page = new PageInfo<Manager>(list);

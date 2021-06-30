@@ -7,11 +7,25 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface TeacherService {
-	public List<Teacher> find(Teacher teacher);
-	public Teacher get(Serializable id);
-	public void insert(Teacher teacher);
-	public void update(Teacher teacher);
-	public void delete(Serializable id);
+	public static List<Teacher> find() {
+		return null;
+	}
+
+	public static Teacher get(Serializable id) {
+		return null;
+	}
+
+	public static void insert(Teacher teacher) {
+	}
+
+	public static void update(Teacher teacher) {
+
+	}
+
+	public static void delete(Serializable id) {
+
+	}
+
 	public void delete(Serializable[] ids);
 	public Teacher login(Teacher teacher);
 	/**分页查询学生信息*/
