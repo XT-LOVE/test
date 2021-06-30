@@ -10,7 +10,7 @@ public class Paper {
 	//试卷编号
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "tst_no",, nullable = false)
+	@Column(name = "tst_no", nullable = false)
 	private String paperId;
 	//试卷名称
 	@Column(name = "tst_name")
@@ -43,7 +43,7 @@ public class Paper {
 	}
 
 	public Paper(String paperId, String paperName, String createTime, String paperType, int paperDif,
-				 int problemNum, String score, String paperDetail, int teacherId) {
+				 int problemNum, String score, List<Question> paperDetail, int teacherId) {
 		this.paperId = paperId;
 		this.paperName = paperName;
 		this.createTime = createTime;
@@ -112,11 +112,11 @@ public class Paper {
 		this.score = score;
 	}
 
-	public String getPaperDetail() {
+	public List<Question> getPaperDetail() {
 		return paperDetail;
 	}
 
-	public void setPaperDetail(String paperDetail) {
+	public void setPaperDetail(List<Question> paperDetail) {
 		this.paperDetail = paperDetail;
 	}
 
