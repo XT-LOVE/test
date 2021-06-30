@@ -5,13 +5,17 @@ import java.util.List;
 
 import com.github.pagehelper.PageInfo;
 
-import com.example.test.domain.Student;
+import com.example.test.entity.Student;
 
 public interface StudentService {
 	public List<Student> find(Student student);
 	/**查询所有待审核记录*/
 	public List<Student> findPending(Student student);
-	public static Student get(Serializable id);
+
+	public static Student get(Serializable id) {
+		return null;
+	}
+
 	public void insert(Student student);
 	public void update(Student student);
 	public void delete(Serializable id);

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 //import org.apache.poi.hssf.record.UserSViewEnd;
-import com.example.test.domain.MsgItem;
+import com.example.test.entity.MsgItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.controller.BaseController;
-import com.example.test.domain.Student;
+import com.example.test.entity.Student;
 import com.example.test.service.StudentService;
 /**
  * 用户管理

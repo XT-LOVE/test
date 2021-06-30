@@ -16,7 +16,7 @@ import com.example.test.entity.Paper;
 import com.example.test.entity.Question;
 import com.example.test.service.PaperService;
 import com.example.test.service.QuestionService;
-import com.example.test.service.UserService;
+import com.example.test.service.ManagerService;
 
 /**
  * 试卷综合管理

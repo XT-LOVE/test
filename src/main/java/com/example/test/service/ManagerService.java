@@ -1,6 +1,6 @@
 package com.example.test.service;
 
-import com.example.test.domain.Manager;
+import com.example.test.entity.Manager;
 import com.github.pagehelper.PageInfo;
 
 import java.io.Serializable;

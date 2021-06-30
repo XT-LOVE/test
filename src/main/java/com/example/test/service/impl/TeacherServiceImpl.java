@@ -1,14 +1,13 @@
 package com.example.test.service.impl;
 
 import com.example.test.dao.TeacherDao;
-import com.example.test.domain.Teacher;
+import com.example.test.entity.Teacher;
 import com.example.test.service.TeacherService;
-import com.example.test.util.MD5Util;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.example.test.util.MD5Util;
 import java.io.Serializable;
 import java.util.List;
 

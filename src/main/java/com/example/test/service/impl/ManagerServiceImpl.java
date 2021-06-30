@@ -1,7 +1,7 @@
 package com.example.test.service.impl;
 
 import com.example.test.dao.ManagerDao;
-import com.example.test.domain.Manager;
+import com.example.test.entity.Manager;
 import com.example.test.service.ManagerService;
 import com.example.test.util.MD5Util;
 import com.github.pagehelper.PageHelper;
