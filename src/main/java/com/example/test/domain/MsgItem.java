@@ -3,7 +3,6 @@ package com.example.test.domain;
 public class MsgItem {
     private String remark;
     private String errorNo;
-    private String errorInfo;
     public String getRemark() {
         return remark;
     }
@@ -16,12 +15,4 @@ public class MsgItem {
     public void setErrorNo(String errorNo) {
         this.errorNo = errorNo;
     }
-    public String getErrorInfo() {
-        return errorInfo;
-    }
-    public void setErrorInfo(String errorInfo) {
-        this.errorInfo = errorInfo;
-    }
-
-
 }

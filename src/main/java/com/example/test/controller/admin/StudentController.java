@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,99 +28,29 @@ public class StudentController extends BaseController{
 
 	@Autowired
 	StudentService studentService;
-	//跳转到登录页面
-	@RequestMapping("/admin/login.action")
-	public String toLoin(Student user, Model model, HttpSession session){
-		if(session.getAttribute("userName")!= null){
-			return "/admin/index.jsp";
-		}
-		List<Student> dataList = userService.find(user);
-		model.addAttribute("dataList", dataList);
-		return "/admin/login.jsp";			
-	}
-	
-	@RequestMapping("/admin/userLogin.action")
-	public String checkUser(Student user, Model model, HttpSession session){
-		Student loginUser = userService.login(user);
-		
-		if(session.getAttribute("userName")!= null){
-			return "/admin/index.jsp";
-		}
-		
-		if(loginUser!=null && loginUser.getUserType() == 2){
-			session.setAttribute("userName", loginUser.getUserName());
-			return "/admin/index.jsp";
-		}else{
-			model.addAttribute("message", "用户名或密码输入错误！！！");
-			return "/admin/login.jsp";
-		}
-	}
-	
-	/**
-	 * 判断账户信息是否存在
-	 * @param name
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/admin/checkAccount.action")
-	public String checkAccount(String userId, Model model){
-		Student userInfo = userService.get(userId);
-		if(userInfo!= null){
-			model.addAttribute("message", "该账号已经存在");
-		}else{
-			model.addAttribute("message", "<font color='green'>验证通过</font>");
-		}
-		model.addAttribute("userId", userId);
-		return "/admin/info-reg.jsp";
-	}
-	
-	/**
-	 * ajax验证用户账号是否存在
-	 * @param userId
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping("/admin/userRegist.action")
+
+	//验证学生账号是否存在
+	@RequestMapping("/student？method=checkAccount")
 	@ResponseBody
-	public  MsgItem userRegist(String userId, Model model, HttpSession session){
-		MsgItem msgItem = new MsgItem();
-		Student user = userService.get(userId);
-		if(user!=null){
-			msgItem.setErrorNo("1");
-			msgItem.setErrorInfo("账号已经存在");
+	public boolean userRegist(String stu_no, Model model, HttpSession session){
+		Student student = StudentService.get(stu_no);
+		if(student!=null){
+			return true;
 		}else{
-			msgItem.setErrorNo("0");
-			msgItem.setErrorInfo("<font color='green'>验证通过</font>");
+			return false;
 		}
-		return msgItem;
-	} 
-	
-	//跳转到登录页面
-	@RequestMapping("/admin/exitSys.action")
-	public String exitSys(Student user, Model model, HttpSession session){
-		if(session.getAttribute("userName")!= null){
-			session.removeAttribute("userName");
-			return "forward:/admin/login.action";
-		}
-		return "/admin/login.jsp";			
-	}
-	
-	//跳转到题库录入页面
-	@RequestMapping(value="/admin/toQueDep.action",method=RequestMethod.POST)
-	public String toQueDep(Model model, HttpSession session){
-		return "/admin/info-reg.jsp";			
 	}
 	
 	//获取所有的用户信息
 	@RequestMapping("/admin/getAllUser.action")
 	public String getAllUserInfo(@RequestParam(value="page", defaultValue="1") int page,
-								 Student user, Model model, HttpSession session){
+								 Student student, Model model, HttpSession session){
 //		List<User> dataList = userService.find(user);
-		PageInfo<Student> pageInfo = userService.findByPage(user, page, 5);
+		PageInfo<Student> pageInfo = studentService.findByPage(student, page, 5);
 		List<Student> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
-		return "/admin/info-mgt.jsp";			
+		return "/admin/info-mgt.jsp";
 	}
 	
 	//获取所有的用户信息

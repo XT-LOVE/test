@@ -11,12 +11,16 @@ public interface StudentService {
 	public List<Student> find(Student student);
 	/**查询所有待审核记录*/
 	public List<Student> findPending(Student student);
-	public Student get(Serializable id);
+	public static Student get(Serializable id);
 	public void insert(Student student);
 	public void update(Student student);
 	public void delete(Serializable id);
 	public void delete(Serializable[] ids);
-	public Student login(Student student);
+
+	public static Student login(Student student) {
+		return null;
+	}
+
 	/**查询学生信息*/
 	public Student getStu(Student student);
 	/**分页查询学生信息*/
