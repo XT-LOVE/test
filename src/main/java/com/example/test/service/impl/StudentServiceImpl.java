@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.StudentDao;
-import com.example.test.domain.Student;
+import com.example.test.entity.Student;
 import com.example.test.service.StudentService;
 import com.example.test.util.MD5Util;
 @Service

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.controller.BaseController;
-import com.example.test.domain.Question;
-import com.example.test.domain.Type;
+import com.example.test.entity.Question;
+import com.example.test.entity.Type;
 import com.example.test.service.QuestionService;
 import com.example.test.service.TypeService;
 /**

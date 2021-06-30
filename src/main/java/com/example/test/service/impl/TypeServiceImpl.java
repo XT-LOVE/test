@@ -9,7 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.TypeDao;
-import com.example.test.domain.Type;
+import com.example.test.entity.Type;
 import com.example.test.service.TypeService;
 
 @Service

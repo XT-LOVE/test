@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.example.test.mapper.StudentMapper">
 
 	<!-- 数据库表映射 -->
-	<resultMap id="userRM" type="com.example.test.domain.Student">
+	<resultMap id="userRM" type="com.example.test.entity.Student">
 		<id property="stu_no" column="stu_no"/>
 		<result property="stu_name" column="stu_name"/>
 		<result property="stu_pwd" column="stu_pwd"/>
@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 新增 -->
-	<insert id="insert" parameterType="com.example.test.domain.Student">
+	<insert id="insert" parameterType="com.example.test.entity.Student">
 		insert into student
 		(stu_no,stu_name,stu_pwd,stu_discipline,stu_grade)
 		values
@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- 修改 -->
-	<update id="update" parameterType="com.example.test.domain.Student">
+	<update id="update" parameterType="com.example.test.entity.Student">
 		update student
 		<set>
 			<if test="stu_no!=null">
@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 查询一个录 -->
-	<select id="get" parameterType="com.example.test.domain.Student" resultMap="userRM">
+	<select id="get" parameterType="com.example.test.entity.Student" resultMap="userRM">
 		select * from student
 		where stu_no=#{stu_no}
 	</select>
@@ -64,7 +64,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	
 	<!-- 查询一个录 -->
-	<select id="getStu" parameterType="com.example.test.domain.Student" resultMap="userRM">
+	<select id="getStu" parameterType="com.example.test.entity.Student" resultMap="userRM">
 		select * from student
 		where stu_no=#{stu_no}
 	</select>

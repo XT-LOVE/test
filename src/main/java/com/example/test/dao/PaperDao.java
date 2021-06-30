@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import com.example.test.domain.Paper;
+import com.example.test.entity.Paper;
 
 public interface PaperDao extends BaseDao<Paper> {
 	/**

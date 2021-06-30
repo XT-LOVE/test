@@ -5,7 +5,7 @@
 <mapper namespace="com.example.test.mapper.TeacherMapper">
 
 	<!-- 数据库表映射 -->
-	<resultMap id="userRM" type="com.example.test.domain.Teacher">
+	<resultMap id="userRM" type="com.example.test.entity.Teacher">
 		<id property="tea_no" column="tea_no"/>
 		<result property="tea_name" column="tea_name"/>
 		<result property="tea_pwd" column="tea_pwd"/>
@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<!-- 新增 -->
-	<insert id="insert" parameterType="com.example.test.domain.Teacher">
+	<insert id="insert" parameterType="com.example.test.entity.Teacher">
 		insert into teacher
 			(tea_no,tea_name,tea_pwd,tea_discipline,tea_mail)
 		values
@@ -22,7 +22,7 @@
 	</insert>
 
 	<!-- 修改 -->
-	<update id="update" parameterType="com.example.test.domain.Teacher">
+	<update id="update" parameterType="com.example.test.entity.Teacher">
 		update teacher
 		<set>
 			<if test="tea_no!=null">
@@ -52,7 +52,7 @@
 	</select>
 
 	<!-- 查询一个录 -->
-	<select id="get" parameterType="com.example.test.domain.Teacher" resultMap="userRM">
+	<select id="get" parameterType="com.example.test.entity.Teacher" resultMap="userRM">
 		select * from teacher
 		where tea_no=#{tea_no}
 	</select>
@@ -64,7 +64,7 @@
 	</delete>
 
 	<!-- 查询一个录 -->
-	<select id="getTea" parameterType="com.example.test.domain.Teacher" resultMap="userRM">
+	<select id="getTea" parameterType="com.example.test.entity.Teacher" resultMap="userRM">
 		select * from teacher
 		where tea_no=#{tea_no}
 	</select>

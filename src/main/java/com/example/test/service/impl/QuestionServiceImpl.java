@@ -10,7 +10,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.dao.QuestionDao;
-import com.example.test.domain.Question;
+import com.example.test.entity.Question;
 import com.example.test.service.QuestionService;
 @Service
 public class QuestionServiceImpl implements QuestionService {
