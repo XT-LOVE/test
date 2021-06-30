@@ -8,7 +8,9 @@ import com.github.pagehelper.PageInfo;
 import com.example.test.entity.Student;
 
 public interface StudentService {
-	public List<Student> find(Student student);
+	public static List<Student> find() {
+		return null;
+	}
 
 	public static Student get(Serializable id) {
 		return null;

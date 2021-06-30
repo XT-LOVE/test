@@ -21,7 +21,7 @@ public abstract class StudentServiceImpl implements StudentService {
 	//查询所有学生
 	public List<Student> find(Student student) {
 		// TODO Auto-generated method stub
-		return studentDao.find(student);
+		return studentDao.find();
 	}
 
 	//查询单个学生
@@ -70,7 +70,7 @@ public abstract class StudentServiceImpl implements StudentService {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = studentDao.find(student);
+	    List<Student> list = studentDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Student> page = new PageInfo<Student>(list);

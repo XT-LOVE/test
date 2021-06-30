@@ -8,7 +8,7 @@ import java.util.List;
  * @CreateDate:	2017-3-11
  */
 public interface BaseDao<T> {
-	public List<T> find(T entity);
+	public List<T> find();
 	public T get(Serializable id);
 	public void insert(T entity);
 	public void update(T entity);

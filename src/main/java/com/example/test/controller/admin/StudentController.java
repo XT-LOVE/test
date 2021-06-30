@@ -49,9 +49,9 @@ public class StudentController extends BaseController{
 	}
 
 	//获取单个学生信息
-	@RequestMapping("/student/{stu_no}")
+	@RequestMapping("/student?method=getStuInfo")
 	@ResponseBody
-	public ApiResult findById(@PathVariable("stu_no") int stu_no) {
+	public ApiResult findById(int stu_no) {
 		Student student = StudentService.get(stu_no);
 		if (student != null) {
 			return ApiResultHandler.buildApiResult(200,"请求成功",student);
@@ -61,12 +61,11 @@ public class StudentController extends BaseController{
 	}
 
 	//获取所有的学生信息
-	@RequestMapping("/student/{page}/{size}")
+	@RequestMapping("/student?method=getAllStuInfo")
 	@ResponseBody
-	public ApiResult findAll(@PathVariable int page, @PathVariable int size) {
-		List<Student> studentPage = new List<>(page,size);
-		List<Student> res = StudentService.findAll(studentPage);
-		return  ApiResultHandler.buildApiResult(200,"分页查询所有学生",res);
+	public ApiResult findAll(int stu_no) {
+		List<Student> studentList = StudentService.find();
+		return  ApiResultHandler.buildApiResult(200,"查询所有学生",studentList);
 	}
 
 	//添加学生信息
