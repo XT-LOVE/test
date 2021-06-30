@@ -1,16 +1,14 @@
 package com.example.test.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-
 import com.example.test.dao.TypeDao;
 import com.example.test.entity.Type;
 import com.example.test.service.TypeService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TypeServiceImpl implements TypeService{

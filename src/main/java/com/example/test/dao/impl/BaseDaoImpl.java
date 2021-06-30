@@ -23,8 +23,8 @@ public abstract class BaseDaoImpl<T> extends SqlSessionDaoSupport implements Bas
 		this.ns = ns;
 	}
 
-	public List<T> find(T entity) {
-		List<T> oList = this.getSqlSession().selectList(ns + "find", entity);
+	public List<T> find() {
+		List<T> oList = this.getSqlSession().selectList(ns + "find");
 		return oList;
 	}
 	public T get(Serializable id) {

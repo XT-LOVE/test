@@ -62,10 +62,4 @@
 		delete from teacher
 		where tea_no=#{tea_no}
 	</delete>
-
-	<!-- 查询一个录 -->
-	<select id="getTea" parameterType="com.example.test.entity.Teacher" resultMap="userRM">
-		select * from teacher
-		where tea_no=#{tea_no}
-	</select>
 </mapper>

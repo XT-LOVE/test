@@ -53,10 +53,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from manager
 		where mana_no=#{mana_no}
 	</delete>
-	
-	<!-- 查询一个录 -->
-	<select id="getMan" parameterType="com.example.test.entity.Manager" resultMap="userRM">
-		select * from manager
-		where mana_no=#{mana_no}
-	</select>
 </mapper>

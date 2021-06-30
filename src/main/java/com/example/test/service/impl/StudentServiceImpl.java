@@ -2,7 +2,7 @@ package com.example.test.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
-
+import com.example.test.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +12,19 @@ import com.github.pagehelper.PageInfo;
 import com.example.test.dao.StudentDao;
 import com.example.test.entity.Student;
 import com.example.test.service.StudentService;
-import com.example.test.util.MD5Util;
 @Service
-public class StudentServiceImpl implements StudentService {
+public abstract class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	StudentDao studentDao;
-	
+
+	//查询所有学生
 	public List<Student> find(Student student) {
 		// TODO Auto-generated method stub
-		return studentDao.find(student);
+		return studentDao.find();
 	}
 
+	//查询单个学生
 	public Student get(Serializable id) {
 		// TODO Auto-generated method stub
 		return studentDao.get(id);
@@ -64,34 +65,12 @@ public class StudentServiceImpl implements StudentService {
 		return null;
 	}
 
-	public List<Student> findPending(Student student) {
-		// TODO Auto-generated method stub
-		return StudentDao.findPending(student);
-	}
-
-	public Student getStu(Student student) {
-		// TODO Auto-generated method stub
-		return studentDao.getStu(student);
-	}
-
 	public PageInfo<Student> findByPage(Student student, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = studentDao.find(student);
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Student> page = new PageInfo<Student>(list);
-	    return page;
-	}
-
-	public PageInfo<Student> findPendingByPage(Student student, Integer pageNo,
-											   Integer pageSize) {
-		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = StudentDao.findPending(student);
+	    List<Student> list = studentDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Student> page = new PageInfo<Student>(list);

@@ -62,34 +62,12 @@ public abstract class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
-	public List<Teacher> findPending(Teacher teacher) {
-		// TODO Auto-generated method stub
-		return TeacherDao.findPending(teacher);
-	}
-
-	public Teacher getStu(Teacher teacher) {
-		// TODO Auto-generated method stub
-		return teacherDao.getTea(teacher);
-	}
-
 	public PageInfo<Teacher> findByPage(Teacher teacher, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
 	    List<Teacher> list = teacherDao.find(teacher);
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Teacher> page = new PageInfo<Teacher>(list);
-	    return page;
-	}
-
-	public PageInfo<Teacher> findPendingByPage(Teacher teacher, Integer pageNo,
-											   Integer pageSize) {
-		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Teacher> list = TeacherDao.findPending(teacher);
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Teacher> page = new PageInfo<Teacher>(list);
