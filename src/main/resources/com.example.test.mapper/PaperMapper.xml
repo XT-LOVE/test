@@ -53,6 +53,53 @@
         where tst_no=#{paperId}
     </update>
 
+    <update id="updatePaper">
+        update t_paper
+        <set>
+            <if test="tst_name!=null">
+                tst_name=#{paperName},
+            </if>
+            <if test="tst_time!=null">
+                tst_time=#{createTime},
+            </if>
+            <if test="tst_type!=null">
+                tst_type=#{paperType},
+            </if>
+            <if test="tst_dif!=null">
+                tst_dif=#{paperDif},
+            </if>
+            <if test="tst_num!=null">
+                tst_num=#{problemNum},
+            </if>
+            <if test="tst_score!=null">
+                tst_score=#{score},
+            </if>
+        </set>
+        where tst_no=#{paperId}
+        and tst_tea=#{teacherId}
+    </update>
+
+    <!-- 查询所有记录 -->
+    <select id="find" parameterType="string" resultMap="paperRM">
+        select * from test
+    </select>
+
+    <!-- 查询一个记录 -->
+    <select id="get" parameterType="String" resultMap="paperRM">
+        select * from test
+        where tst_no=#{paperId}
+    </select>
+    <select id="getPaperDetail" resultType="java.lang.String">
+
+    </select>
+
+    <!-- 删除一条记录 -->
+    <delete id="delete" parameterType="string">
+        delete from t_paper
+        where tst_no=#{paperId}
+    </delete>
+
+
 
 
 </mapper>
