@@ -1,7 +1,5 @@
 package com.example.test.dao.impl;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Repository;
@@ -11,30 +9,14 @@ import com.example.test.entity.Paper;
 @Repository
 public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 	public PaperDaoImpl() {
-		this.setNs("edu.fjnu.online.mapper.PaperMapper.");
+		this.setNs("com.example.test.mapper.PaperMapper.");
 	}
 
-	public List<Paper> getUserPaperById(Serializable id) {
-		return this.getSqlSession().selectList(this.getNs()+"getUserPaperById", id);
-	}
-
-	public Paper getPaperDetail(Map map) {
-		// TODO Auto-generated method stub
+	public String getPaperDetail(Map map) {
 		return this.getSqlSession().selectOne(this.getNs()+"getPaperDetail", map);
 	}
 
-	public void updateUserPaper(Map map) {
-		// TODO Auto-generated method stub
-		this.getSqlSession().selectOne(this.getNs()+"updateUserPaper", map);
-	}
-
-	public List<Paper> getUndoPaper(Map map) {
-		// TODO Auto-generated method stub
-		return this.getSqlSession().selectList(this.getNs()+"getUndoPaper", map);
-	}
-
-	public List<Paper> qryUndoPaper(Map map) {
-		// TODO Auto-generated method stub
-		return this.getSqlSession().selectList(this.getNs()+"qryUndoPaper", map);
+	public void updatePaper(Map map) {
+		this.getSqlSession().selectOne(this.getNs() + "updatePaper", map);
 	}
 }
