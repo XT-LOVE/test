@@ -62,10 +62,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from student
 		where stu_no=#{stu_no}
 	</delete>
-	
-	<!-- 查询一个录 -->
-	<select id="getStu" parameterType="com.example.test.entity.Student" resultMap="userRM">
-		select * from student
-		where stu_no=#{stu_no}
-	</select>
 </mapper>

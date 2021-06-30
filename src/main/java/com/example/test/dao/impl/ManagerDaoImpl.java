@@ -11,13 +11,4 @@ public abstract class ManagerDaoImpl extends BaseDaoImpl<Manager> implements Man
     public ManagerDaoImpl() {
         this.setNs("com.example.test.mapper.ManagerMapper.");			//设置命名空间
     }
-
-    public List<Manager> findPending(Manager manager) {
-        return this.getSqlSession().selectList(this.getNs()+"findPending",manager);
-    }
-
-    public Manager getMan(Manager manager) {
-        return this.getSqlSession().selectOne(this.getNs()+"getMan",manager);
-    }
-
 }

@@ -63,16 +63,6 @@ public abstract class ManagerServiceImpl implements ManagerService {
 		return null;
 	}
 
-	public List<Manager> findPending(Manager manager) {
-		// TODO Auto-generated method stub
-		return ManagerDao.findPending(manager);
-	}
-
-	public Manager getStu(Manager manager) {
-		// TODO Auto-generated method stub
-		return managerDao.getMan(manager);
-	}
-
 	public PageInfo<Manager> findByPage(Manager manager, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
@@ -85,16 +75,5 @@ public abstract class ManagerServiceImpl implements ManagerService {
 	    return page;
 	}
 
-	public PageInfo<Manager> findPendingByPage(Manager manager, Integer pageNo,
-											   Integer pageSize) {
-		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Manager> list = ManagerDao.findPending(manager);
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Manager> page = new PageInfo<Manager>(list);
-	    return page;
-	}
 
 }

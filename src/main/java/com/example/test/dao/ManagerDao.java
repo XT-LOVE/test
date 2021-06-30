@@ -10,6 +10,4 @@ public interface ManagerDao extends BaseDao<Manager>{
     public static List<Manager> findPending(Manager manager) {
         return null;
     }
-
-    public Manager getMan(Manager manager);
 }
