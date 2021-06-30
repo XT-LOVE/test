@@ -17,9 +17,9 @@ public abstract class TeacherServiceImpl implements TeacherService {
 	@Autowired
 	TeacherDao teacherDao;
 	
-	public List<Teacher> find(Teacher teacher) {
+	public List<Teacher> find() {
 		// TODO Auto-generated method stub
-		return teacherDao.find(teacher);
+		return teacherDao.find();
 	}
 
 	public Teacher get(Serializable id) {
@@ -67,7 +67,7 @@ public abstract class TeacherServiceImpl implements TeacherService {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Teacher> list = teacherDao.find(teacher);
+	    List<Teacher> list = teacherDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Teacher> page = new PageInfo<Teacher>(list);

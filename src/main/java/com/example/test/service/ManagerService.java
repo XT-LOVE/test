@@ -7,11 +7,18 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface ManagerService {
-	public List<Manager> find(Manager manager);
-	public Manager get(Serializable id);
-	public void insert(Manager manager);
-	public void update(Manager manager);
-	public void delete(Serializable id);
+	public static List<Manager> find() {
+		return null;
+	}
+	public static Manager get(Serializable id) {
+		return null;
+	}
+	public static void insert(Manager manager) {
+	}
+	public static void update(Manager manager) {
+	}
+	public static void delete(Serializable id) {
+	}
 	public void delete(Serializable[] ids);
 	public Manager login(Manager manager);
 	/**分页查询学生信息*/
