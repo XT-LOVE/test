@@ -6,13 +6,7 @@ import com.example.test.entity.Login;
 import com.example.test.entity.Student;
 import com.example.test.service.StudentService;
 import com.example.test.util.ApiResultHandler;
-import com.github.pagehelper.PageInfo;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 /**
@@ -20,36 +14,35 @@ import java.util.List;
  */
 
 
-@Controller
+@RestController
 public class StudentController extends BaseController{
 
 	//验证学生账号是否存在
-	@RequestMapping("/student?method=checkAccount")
+	@PostMapping("/student?method=checkAccount")
 	@ResponseBody
-	public ApiResult userRegist(String stu_no){
+	public ApiResult checkAccount(String stu_no){
 		Student student = StudentService.get(stu_no);
-		if(stu_no!=null){
+		if(student!=null){
 			return ApiResultHandler.buildApiResult(200, "账号存在", student);
 		}else{
 			return ApiResultHandler.buildApiResult(404, "账号不存在", null);
 		}
 	}
 
-	//账号的密码检查
-	@RequestMapping("/student?method=checkPwd")
+	//账号密码检查
+	@PostMapping("/student?method=checkPwd")
 	@ResponseBody
 	public ApiResult checkPwd(Login login){
 		Student student = StudentService.get(login.getUsername());
 		if(student!=null){
-			return ApiResultHandler.buildApiResult(200, "账号存在", student);
-			}
-		else{
-			return ApiResultHandler.buildApiResult(404, "账号不存在", null);
+			return ApiResultHandler.buildApiResult(200, "密码正确", student);
+		} else{
+			return ApiResultHandler.buildApiResult(404, "密码错误", null);
 		}
 	}
 
 	//获取单个学生信息
-	@RequestMapping("/student?method=getStuInfo")
+	@GetMapping("/student?method=getStuInfo")
 	@ResponseBody
 	public ApiResult findById(int stu_no) {
 		Student student = StudentService.get(stu_no);
@@ -61,34 +54,40 @@ public class StudentController extends BaseController{
 	}
 
 	//获取所有的学生信息
-	@RequestMapping("/student?method=getAllStuInfo")
+	@GetMapping("/student?method=getAllStuInfo")
 	@ResponseBody
-	public ApiResult findAll(int stu_no) {
+	public ApiResult findAll() {
 		List<Student> studentList = StudentService.find();
 		return  ApiResultHandler.buildApiResult(200,"查询所有学生",studentList);
 	}
 
 	//添加学生信息
-	@RequestMapping("/student?method=addStu")
-	public void addStu(Student user){
-		StudentService.insert(user);
+	@PostMapping("/student?method=addStu")
+	@ResponseBody
+	public ApiResult addStu(Student student){
+		StudentService.insert(student);
+		return ApiResultHandler.buildApiResult(200,"添加成功",null);
 	}
-	
+
 	//删除学生信息
-	@RequestMapping("student?method=deleteStu")
-	public void deleteStu(String stu_no){
+	@DeleteMapping("student?method=deleteStu")
+	@ResponseBody
+	public ApiResult deleteStu(String stu_no){
 		if(stu_no != null){
 			String ids[] = stu_no.split(",");
 			for(int i=0;i<ids.length;i++){
 				StudentService.delete(ids[i]);
 			}
 		}
+		return ApiResultHandler.buildApiResult(200,"删除成功",null);
 	}
 
 	//修改学生信息
-	@RequestMapping("student?method=updateStu")
-	public void updateUser(Student user, Model model){
-		StudentService.update(user);
+	@PutMapping("student?method=updateStu")
+	@ResponseBody
+	public ApiResult updateStu(Student student){
+		StudentService.update(student);
+		return ApiResultHandler.buildApiResult(200,"更新成功",null);
 	}
 	
 }

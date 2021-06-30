@@ -19,7 +19,7 @@ public abstract class StudentServiceImpl implements StudentService {
 	StudentDao studentDao;
 
 	//查询所有学生
-	public List<Student> find(Student student) {
+	public List<Student> find() {
 		// TODO Auto-generated method stub
 		return studentDao.find();
 	}
