@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 			<if test="mana_pwd!=null">
 				mana_pwd=#{mana_pwd},
+			</if>
 		</set>
 			where mana_no=#{mana_no}
 	</update>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.example.test.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +28,7 @@ import com.example.test.service.ManagerService;
 public class PaperMgController {
 
 	@Autowired
-	UserService userService;
+	StudentService userService;
 	@Autowired
 	PaperService paperService;
 	@Autowired
