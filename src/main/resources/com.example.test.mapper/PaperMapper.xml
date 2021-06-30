@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.dao.PaperDao">
+
+    <!-- 数据库表映射 -->
+    <resultMap id="paperRM" type="com.example.test.entity.Paper">
+        <id property="paperId" column="tst_no"/>
+        <result property="paperName" column="tst_name"/>
+        <result property="createTime" column="tst_time"/>
+        <result property="paperType" column="tst_type"/>
+        <result property="paperDif" column="tst_dif"/>
+        <result property="problemNum" column="tst_num"/>
+        <result property="score" column="tst_score"/>
+        <result property="teacherId" column="tst_tea"/>
+    </resultMap>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.example.test.entity.Paper">
+        insert into test
+        values
+        (#{paperId},#{paperName},#{createTime},#{paperType},
+        #{paperDif},#{problemNum},#{score}, #{teacherId})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.example.test.entity.Paper">
+        update test
+        <set>
+            <if test="tst_name!=null">
+                tst_name=#{paperName},
+            </if>
+            <if test="tst_time!=null">
+                tst_time=#{createTime},
+            </if>
+            <if test="tst_type!=null">
+                tst_type=#{paperType},
+            </if>
+            <if test="tst_dif!=null">
+                tst_dif=#{paperDif},
+            </if>
+            <if test="tst_num!=null">
+                tst_num=#{problemNum},
+            </if>
+            <if test="tst_score!=null">
+                tst_score=#{score},
+            </if>
+            <if test="tst_tea!=null">
+                tst_tea=#{teacherId},
+            </if>
+        </set>
+        where tst_no=#{paperId}
+    </update>
+
+
+
+</mapper>
