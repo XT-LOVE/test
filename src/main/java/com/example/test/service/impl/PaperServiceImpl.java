@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
+import com.example.test.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class PaperServiceImpl implements PaperService {
 	@Autowired
 	PaperDao paperDao;
 	public List<Paper> find(Paper paper) {
-		return paperDao.find(paper);
+		return paperDao.find();
 	}
 
 	public Paper get(Serializable id) {
@@ -42,20 +43,21 @@ public class PaperServiceImpl implements PaperService {
 		paperDao.delete(ids);
 	}
 
-	public List<Paper> getUserPaperById(Serializable id) {
+/*	public List<Paper> getUserPaperById(Serializable id) {
 		// TODO Auto-generated method stub
 		return paperDao.getUserPaperById(id);
-	}
+	}*/
 
-	public Paper getPaperDetail(Map map) {
+	public List<Question> getPaperDetail(Map map) {
 		// TODO Auto-generated method stub
 		return paperDao.getPaperDetail(map);
 	}
 
-	public void updateUserPaper(Map map) {
+	public void updatePaper(Map map) {
 		// TODO Auto-generated method stub
-		paperDao.updateUserPaper(map);
+		paperDao.updatePaper(map);
 	}
+/*
 
 	public List<Paper> getUndoPaper(Map map) {
 		// TODO Auto-generated method stub
@@ -66,6 +68,7 @@ public class PaperServiceImpl implements PaperService {
 		// TODO Auto-generated method stub
 		return paperDao.qryUndoPaper(map);
 	}
+
 
 	public PageInfo<Paper> findAllPage(Paper paper, Integer pageNo,
 			Integer pageSize) {
@@ -78,5 +81,5 @@ public class PaperServiceImpl implements PaperService {
 	    PageInfo<Paper> page = new PageInfo<Paper>(list);
 	    return page;
 	}
-
+*/
 }
