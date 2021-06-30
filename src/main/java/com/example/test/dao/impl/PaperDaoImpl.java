@@ -1,7 +1,9 @@
 package com.example.test.dao.impl;
 
+import java.util.List;
 import java.util.Map;
 
+import com.example.test.entity.Question;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.PaperDao;
@@ -12,7 +14,7 @@ public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 		this.setNs("com.example.test.mapper.PaperMapper.");
 	}
 
-	public String getPaperDetail(Map map) {
+	public List<Question> getPaperDetail(Map map) {
 		return this.getSqlSession().selectOne(this.getNs()+"getPaperDetail", map);
 	}
 
