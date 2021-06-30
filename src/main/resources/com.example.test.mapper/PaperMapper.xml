@@ -89,8 +89,9 @@
         select * from test
         where tst_no=#{paperId}
     </select>
-    <select id="getPaperDetail" resultType="java.lang.String">
-
+    <select id="getPaperDetail" resultType="com.example.test.entity.Question">
+        select * from tst_pro
+        where tst_no=#{paperId}
     </select>
 
     <!-- 删除一条记录 -->
