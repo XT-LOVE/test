@@ -14,15 +14,16 @@
         <result property="problemNum" column="tst_num"/>
         <result property="score" column="tst_score"/>
         <result property="teacherId" column="tst_tea"/>
+        <result property="questionId" column="pro_no"/>
     </resultMap>
 
     <!-- 新增 -->
     <insert id="insert" parameterType="com.example.test.entity.Paper">
         insert into test
-        (tst_name, tst_time, tst_type, tst_dif, tst_num, tst_score, tst_tea)
+        (tst_name, tst_time, tst_type, tst_dif, tst_num, tst_score, tst_tea, pro_no)
         values
         (#{paperName},#{createTime},#{paperType},
-        #{paperDif},#{problemNum},#{score}, #{teacherId})
+        #{paperDif},#{problemNum},#{score}, #{teacherId},#{questionId})
     </insert>
 
     <!-- 修改 -->
@@ -50,6 +51,9 @@
             <if test="teacherId!=null">
                 tst_tea=#{teacherId},
             </if>
+            <if test="questionId!=null">
+                pro_no=#{questionId}
+            </if>
         </set>
         where tst_no=#{paperId}
     </update>
@@ -75,6 +79,9 @@
             <if test="score!=null">
                 tst_score=#{score},
             </if>
+            <if test="questionId!=null">
+                pro_no=#{questionId}
+            </if>
         </set>
         where tst_no=#{paperId}
         and tst_tea=#{teacherId}
@@ -83,6 +90,7 @@
     <!-- 查询所有记录 -->
     <select id="find" parameterType="string" resultMap="paperRM">
         select * from test
+        where 1=1
     </select>
 
     <!-- 查询一个记录 -->
