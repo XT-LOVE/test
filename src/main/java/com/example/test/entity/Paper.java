@@ -36,7 +36,11 @@ public class Paper {
 	//试卷负责人
 	@Column(name = "tst_tea")
 	private int teacherId;
-	/*//所属章节
+	@Column(name = "pro_no")
+	private String questionId;
+
+
+/*//所属章节
 
 	@OneToMany(cascade=CascadeType.DETACH,fetch=FetchType.LAZY,targetEntity=Integer)
 	private Set<Integer> ch = new HashSet<>();*/
@@ -137,6 +141,13 @@ public class Paper {
         public void setCh(int ch) {
             this.ch = ch;
         }*/
+	public String getQuestionId() {
+		return questionId;
+	}
+
+	public void setQuestionId(String questionId) {
+		this.questionId = questionId;
+	}
 	@Override
 	public String toString() {
 		return "Paper{" +
