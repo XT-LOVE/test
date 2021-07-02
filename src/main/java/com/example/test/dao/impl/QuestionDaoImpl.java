@@ -15,9 +15,10 @@ public class QuestionDaoImpl extends BaseDaoImpl< Question> implements QuestionD
 	}
 
 	@Override
-	public List<Question> createPaper(Map ch_no, Map type, int paperDif) {
+	public List<Question> createPaper(List<Integer> ch_no, List<String> type, int paperDif) {
 		return this.getSqlSession().selectList(this.getNs()+"createPaper");
 	}
+
 
 //	@Override
 //	public List<Question> createPaper(Map map) {
