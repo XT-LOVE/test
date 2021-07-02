@@ -37,6 +37,9 @@ public class QuestionServiceImpl implements QuestionService {
 	public void delete(int id) {
 		questionDao.delete(id);
 	}
+	public List<Question> createPaper(List<Integer> ch_no, List<String> type, int paperDif){
+		return  questionDao.createPaper(ch_no,type,paperDif);
+	}
 
 	public PageInfo<Question> findByPage(Question question, Integer pageNo,
 			Integer pageSize) {
