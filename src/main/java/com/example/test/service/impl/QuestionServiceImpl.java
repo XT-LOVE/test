@@ -19,7 +19,7 @@ public class QuestionServiceImpl implements QuestionService {
 	QuestionDao questionDao;
 	
 	public List<Question> find(Question question) {
-		return questionDao.find(question);
+		return questionDao.find();
 	}
 
 	public Question get(int id) {
@@ -38,18 +38,13 @@ public class QuestionServiceImpl implements QuestionService {
 		questionDao.delete(id);
 	}
 
-	public List<Question> createPaper(Map map) {
-		// TODO Auto-generated method stub
-		return questionDao.createPaper(map);
-	}
-
 	public PageInfo<Question> findByPage(Question question, Integer pageNo,
 			Integer pageSize) {
 		
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Question> list = questionDao.find(question);
+	    List<Question> list = questionDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Question> page = new PageInfo<Question>(list);

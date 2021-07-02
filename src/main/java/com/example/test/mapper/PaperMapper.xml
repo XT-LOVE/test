@@ -101,7 +101,4 @@
         where tst_no=#{paperId}
     </delete>
 
-
-
-
 </mapper>

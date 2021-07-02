@@ -13,6 +13,5 @@ public interface QuestionService {
 	public void insert(Question question);
 	public void update(Question question);
 	public void delete(int id);
-	public List<Question> createPaper(Map map);
 	public PageInfo<Question> findByPage(Question question, Integer pageNo,Integer pageSize);
 }

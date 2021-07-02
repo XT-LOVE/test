@@ -69,17 +69,17 @@ public class PaperServiceImpl implements PaperService {
 		return paperDao.qryUndoPaper(map);
 	}
 
-
+*/
 	public PageInfo<Paper> findAllPage(Paper paper, Integer pageNo,
 			Integer pageSize) {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Paper> list = paperDao.find(paper);
+	    List<Paper> list = paperDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
 	    PageInfo<Paper> page = new PageInfo<Paper>(list);
 	    return page;
 	}
-*/
+
 }

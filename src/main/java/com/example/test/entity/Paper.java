@@ -1,8 +1,7 @@
 package com.example.test.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name="test")
@@ -37,6 +36,10 @@ public class Paper {
 	//试卷负责人
 	@Column(name = "tst_tea")
 	private int teacherId;
+	/*//所属章节
+
+	@OneToMany(cascade=CascadeType.DETACH,fetch=FetchType.LAZY,targetEntity=Integer)
+	private Set<Integer> ch = new HashSet<>();*/
 
 	public Paper() {
 
@@ -127,7 +130,13 @@ public class Paper {
 	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
 	}
+	/*public int getCh() {
+            return ch;
+        }
 
+        public void setCh(int ch) {
+            this.ch = ch;
+        }*/
 	@Override
 	public String toString() {
 		return "Paper{" +

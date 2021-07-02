@@ -11,7 +11,7 @@ public class Question {
 	//习题编号
 	@Id
 	@Column(name = "pro_no")
-	private int pro_no;
+	private int questionId;
 	//习题内容
 	@Column(name = "pro_detail")
 	private String quesDetail;
@@ -39,9 +39,9 @@ public class Question {
 
 	public Question() {
 	}
-	public Question(int pro_no, String quesDetail, int answerId, String keyword, int questionDif,
+	public Question(int questionId, String quesDetail, int answerId, String keyword, int questionDif,
 					int ch, String chTitle, String chMPoint, String questionType) {
-		this.pro_no = pro_no;
+		this.questionId = questionId;
 		this.quesDetail = quesDetail;
 		this.answerId = answerId;
 		this.keyword = keyword;
@@ -54,15 +54,15 @@ public class Question {
 
 	//getter & setter
 	public int getQuestionId() {
-		return pro_no;
+		return questionId;
 	}
 
 	public String getQuesDetail() {
 		return quesDetail;
 	}
 
-	public void setQuestionId(int pro_no) {
-		this.pro_no = pro_no;
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
 	}
 
 	public String getQuesName() {
@@ -132,7 +132,7 @@ public class Question {
 	@Override
 	public String toString() {
 		return "Question{" +
-				"pro_no=" + pro_no +
+				"questionId=" + questionId +
 				", quesDetail='" + quesDetail + '\'' +
 				", answerId=" + answerId +
 				", keyword='" + keyword + '\'' +

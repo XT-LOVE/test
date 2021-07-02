@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.dao.QuestionDao">
+    <!-- 数据库表映射 -->
+    <resultMap id="questionRM" type="com.example.test.entity.Question">
+        <result property="questionId" column="pro_no"/>
+        <result property="quesDetail" column="pro_detail"/>
+        <result property="answerId" column="pro_ansno"/>
+        <result property="keyword" column="pro_keyw"/>
+        <result property="questionDif" column="pro_dif"/>
+        <result property="ch" column="char_no"/>
+        <result property="chTitle" column="char_title"/>
+        <result property="chMPoint" column="char_mpoint"/>
+        <result property="questionType" column="pro_type"/>
+    </resultMap>
+
+    <!-- 新增 -->
+    <insert id="insert" parameterType="com.example.test.entity.Question">
+        insert into problem
+        (pro_detail, pro_ansno, pro_keyw, pro_dif, char_no, char_title, char_mpoint, pro_type)
+        values
+        (#{quesDetail},#{answerId},#{keyword},#{questionDif},#{ch},#{chTitle},#{chMPoint},#{questionType})
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="com.example.test.entity.Question">
+        update problem
+        <set>
+            <if test="quesDetail!=null">
+                pro_detail=#{quesDetail},
+            </if>
+            <if test="answerId!=null">
+                pro_ansno=#{answerId},
+            </if>
+            <if test="keyword!=null">
+                pro_keyw=#{keyword},
+            </if>
+            <if test="questionDif!=null">
+                pro_dif=#{questionDif},
+            </if>
+            <if test="ch!=null">
+                char_no=#{ch},
+            </if>
+            <if test="chTitle!=null">
+                char_title=#{chTitle},
+            </if>
+            <if test="chMPoint!=null">
+                char_mpoint=#{chMPoint},
+            </if>
+            <if test="questionType!=null">
+                pro_type=#{questionType},
+            </if>
+        </set>
+        where pro_no=#{questionId}
+    </update>
+
+    <!-- 查询所有记录 -->
+    <select id="find" parameterType="string" resultMap="questionRM">
+        select * from problem
+        where 1=1
+    </select>
+
+    <!-- 查询一个记录 -->
+    <select id="get" parameterType="String" resultMap="questionRM">
+        select * from problem
+        where pro_no=#{id}
+    </select>
+
+    <!-- 删除一条记录 -->
+    <delete id="delete" parameterType="string">
+        delete from problem
+        where pro_no=#{id}
+    </delete>
+
+    <!-- 随机生成相应数量的题目 -->
+    <select id="createPaper" resultMap="questionRM">
+        select * from problem
+        where char_no in
+        <foreach item="item" index="index" collection="ch_no" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and typeid in
+        <foreach item="item" index="index" collection="type" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        and pro_dif=#{paperDif}
+        ORDER BY RAND() LIMIT #{problemNum}
+    </select>
+
+</mapper>
