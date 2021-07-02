@@ -1,9 +1,7 @@
 package com.example.test.dao.impl;
 
 import java.util.List;
-import java.util.Map;
 
-import com.example.test.entity.Paper;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.QuestionDao;
@@ -15,7 +13,7 @@ public class QuestionDaoImpl extends BaseDaoImpl< Question> implements QuestionD
 	}
 
 	@Override
-	public List<Question> createPaper(List<Integer> ch_no, List<String> type, int paperDif) {
+	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif) {
 		return this.getSqlSession().selectList(this.getNs()+"createPaper");
 	}
 
