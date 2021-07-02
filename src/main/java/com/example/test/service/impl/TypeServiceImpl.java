@@ -17,7 +17,7 @@ public class TypeServiceImpl implements TypeService{
 	TypeDao typeDao;
 	
 	public List<Type> find(Type type) {
-		return typeDao.find(type);
+		return typeDao.find();
 	}
 
 	public Type get(int id) {
@@ -40,7 +40,7 @@ public class TypeServiceImpl implements TypeService{
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNo, pageSize);
-	    List<Type> list = typeDao.find(type);
+	    List<Type> list = typeDao.find();
 	    //用PageInfo对结果进行包装
 	    PageInfo<Type> page = new PageInfo<Type>(list);
 	    return page;
