@@ -1,7 +1,6 @@
 package com.example.test.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.github.pagehelper.PageInfo;
 
@@ -13,6 +12,6 @@ public interface QuestionService {
 	public void insert(Question question);
 	public void update(Question question);
 	public void delete(int id);
-	public List<Question> createPaper(List<Integer> ch_no, List<String> type, int paperDif);
+	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif);
 	public PageInfo<Question> findByPage(Question question, Integer pageNo,Integer pageSize);
 }

@@ -1,7 +1,6 @@
 package com.example.test.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
 	public void delete(int id) {
 		questionDao.delete(id);
 	}
-	public List<Question> createPaper(List<Integer> ch_no, List<String> type, int paperDif){
+	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif){
 		return  questionDao.createPaper(ch_no,type,paperDif);
 	}
 
