@@ -1,9 +1,7 @@
 package com.example.test.controller.admin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,7 +32,7 @@ public class PaperController {
 	QuestionService questionService;
 	/**
 	 * 跳转到试卷管理页面
-	 * @param course
+	 * //@param course
 	 * @param model
 	 * @param session
 	 * @return
@@ -45,7 +43,7 @@ public class PaperController {
 		PageInfo<Paper> pageInfo = paperService.findAllPage(paper, page, 5);
 		List<Paper> dataList = pageInfo.getList();
 //		List<Paper> dataList = paperService.find(paper);
-		for(Paper g : dataList){
+		/*for(Paper g : dataList){
 			String courseName= "";
 			String id = g.getCourseId();
 			if(id != null){
@@ -59,7 +57,7 @@ public class PaperController {
 				str = courseName;
 			}
 			g.setCourseId(str);
-		}
+		}*/
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "/admin/paper-mgt.jsp";			
@@ -68,7 +66,7 @@ public class PaperController {
 	
 	/**
 	 * 跳转到试卷管理页面
-	 * @param course
+	 * //@param course
 	 * @param model
 	 * @param session
 	 * @return
@@ -80,7 +78,7 @@ public class PaperController {
 		PageInfo<Paper> pageInfo = paperService.findAllPage(paper, page, 5);
 		List<Paper> dataList = pageInfo.getList();
 //		List<Paper> dataList = paperService.find(paper);
-		for(Paper g : dataList){
+		/*for(Paper g : dataList){
 			String courseName= "";
 			String id = g.getCourseId();
 			if(id != null){
@@ -94,7 +92,7 @@ public class PaperController {
 				str = courseName;
 			}
 			g.setCourseId(str);
-		}
+		}*/
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return dataList;			
@@ -122,33 +120,18 @@ public class PaperController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/addPaper.action")
-	public String addPaper(@RequestParam int selectNum,@RequestParam int inputNum,
-			@RequestParam int descNum,Paper paper,Model model, HttpSession session){
+	public String addPaper(@RequestParam List<String> ch_no,
+						   @RequestParam List<String> type,
+						   @RequestParam int dif,
+						   Paper paper,Model model, HttpSession session){
 		Map map = new HashMap();
-		List<Question> selectList = null;
-		List<Question> inputList = null;
-		List<Question> descList = null;
 		List<Question> paperList = new ArrayList<Question>();
-		map.put("gradeId", paper.getGradeId());
-		map.put("courseId", paper.getCourseId());
-		if(selectNum>0){//选择题
-			map.put("num", selectNum);
-			map.put("typeId", 1);
-			selectList = questionService.createPaper(map);
-			paperList.addAll(selectList);
-		}
-		if(inputNum>0){//判断题
-			map.put("num", inputNum);
-			map.put("typeId", 4);
-			inputList = questionService.createPaper(map);
-			paperList.addAll(inputList);
-		}
-		if(descNum > 0 ){//描述题
-			map.put("num", descNum);
-			map.put("typeId", 5);
-			descList = questionService.createPaper(map);
-			paperList.addAll(descList);
-		}
+//		map.put("gradeId", paper.getGradeId());
+//		map.put("courseId", paper.getCourseId());
+		paper.setPaperDif(dif);
+		paper.setPaperType(String.join(",", type));
+		paperList = questionService.createPaper(ch_no,type,dif);
+
 		String quesId = "";
 		for(Question ques : paperList){
 			quesId+=ques.getQuestionId()+",";
@@ -157,14 +140,13 @@ public class PaperController {
 			quesId = removeLast(quesId);
 		}
 		paper.setQuestionId(quesId);
-		paper.setPaperstate("0");
 		paperService.insert(paper);
 		return "redirect:/toPaperPage.action";
 	}
 	
 	/**
 	 * 删除试卷信息
-	 * @param paperId	试卷编号，删除多个是，id用逗号分隔开
+	 * @param paperId	试卷编号，删除多个，id用逗号分隔开
 	 * @param model
 	 * @return
 	 */
@@ -178,7 +160,7 @@ public class PaperController {
 		}
 		return "redirect:/toPaperPage.action";
 	} 
-	
+	/*
 	@RequestMapping("/qryPaper.action")
 	public String qryPaper(String paperId, Model model){
 		Paper paper = paperService.get(paperId);
@@ -211,7 +193,7 @@ public class PaperController {
 		model.addAttribute("quesList", quesList);
 		return "/admin/paper-qry.jsp";
 	}
-	
+	*/
 	
 	/**
 	 * 去掉最后一个逗号
