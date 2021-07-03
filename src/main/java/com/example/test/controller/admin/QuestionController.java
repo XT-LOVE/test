@@ -15,9 +15,8 @@ import com.github.pagehelper.PageInfo;
 
 import com.example.test.controller.BaseController;
 import com.example.test.entity.Question;
-import com.example.test.entity.Type;
 import com.example.test.service.QuestionService;
-import com.example.test.service.TypeService;
+
 /**
  * 题库管理
  *
@@ -27,8 +26,6 @@ public class QuestionController extends BaseController {
 
 	@Autowired
 	QuestionService questionService;
-	@Autowired
-	TypeService typeService;
 	/**
 	 * 跳转到题库管理页面
 	 * @param question
@@ -112,7 +109,7 @@ public class QuestionController extends BaseController {
 		//获取问题信息
 		List<Question> dataList = questionService.find(question);
 		//获取题型信息
-		model.addAttribute("type", typeService.find(new Type()));
+//		model.addAttribute("type", typeService.find(new Type()));
 		model.addAttribute("dataList", dataList);
 		return "/admin/question-reg.jsp";			
 	}

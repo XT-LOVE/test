@@ -1,6 +1,5 @@
 package com.example.test.controller.admin;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
@@ -16,18 +15,14 @@ import com.github.pagehelper.PageInfo;
 
 import com.example.test.entity.Paper;
 import com.example.test.entity.Question;
-import com.example.test.entity.Type;
 import com.example.test.service.PaperService;
 import com.example.test.service.QuestionService;
-import com.example.test.service.TypeService;
 
 @Controller
 public class PaperController {
 
 	@Autowired
 	PaperService paperService;
-	@Autowired
-	TypeService typeService;
 	@Autowired
 	QuestionService questionService;
 	/**
@@ -38,6 +33,7 @@ public class PaperController {
 	 * @return
 	 */
 	@RequestMapping("/toPaperPage.action")
+	@ResponseBody
 	public String toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
 			Paper paper,Model model, HttpSession session){
 		PageInfo<Paper> pageInfo = paperService.findAllPage(paper, page, 5);
@@ -106,8 +102,9 @@ public class PaperController {
 	 * @return
 	 */
 	@RequestMapping("/toAddPaperPage.action")
+	@ResponseBody
 	public String toAddPaperPage(Paper paper,Model model, HttpSession session){
-		model.addAttribute("type", typeService.find(new Type()));
+//		model.addAttribute("type", typeService.find(new Type()));
 		return "/admin/paper-reg.jsp";
 	}
 	
@@ -120,6 +117,7 @@ public class PaperController {
 	 */
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/addPaper.action")
+	@ResponseBody
 	public String addPaper(@RequestParam List<String> ch_no,
 						   @RequestParam List<String> type,
 						   @RequestParam int dif,
@@ -151,6 +149,7 @@ public class PaperController {
 	 * @return
 	 */
 	@RequestMapping("/deletePaper.action")
+	@ResponseBody
 	public String deletePaper(String paperId, Model model){
 		if(paperId != null){
 			String ids[] = paperId.split(",");
