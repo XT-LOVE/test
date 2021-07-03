@@ -49,7 +49,7 @@ public class PaperMgController {
 		Map map = new HashMap();
 		map.put("paperId", paperId);
 		map.put("userId", userId);
-		Paper paper = paperService.getPaperDetail(map);
+		Paper paper = paperService.get(paperId);
 		Question question = null;
 		String []ids = paper.getQuestionId().split(",");
 		List<Question> selList = new ArrayList<Question>();
@@ -57,13 +57,13 @@ public class PaperMgController {
 		List<Question> desList = new ArrayList<Question>();
 		for(int i = 0;i<ids.length;i++){
 			question = questionService.get(Integer.parseInt(ids[i]));
-			if("1".equals(question.getTypeId())){//单选
+			if("单项选择题".equals(question.getQuestionType())){//单选
 				selList.add(question);
 			}
-			if("4".equals(question.getTypeId())){//填空
+			if("填空题".equals(question.getQuestionType())){//填空
 				inpList.add(question);
 			}
-			if("5".equals(question.getTypeId())){//简答题
+			if("简答题".equals(question.getQuestionType())){//简答题
 				desList.add(question);
 			}
 		}
