@@ -58,4 +58,4 @@
             <property name="useActualColumnNames" value="false" />
         </table>
     </context>
-</generatorConfiguration>-->
+</generatorConfiguration>

@@ -6,6 +6,7 @@ import java.util.List;
 import com.github.pagehelper.PageInfo;
 
 import com.example.test.entity.Student;
+import org.springframework.stereotype.Component;
 
 public interface StudentService {
 	public static List<Student> find() {
