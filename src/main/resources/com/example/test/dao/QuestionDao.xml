@@ -63,15 +63,15 @@
     </select>
 
     <!-- 查询一个记录 -->
-    <select id="get" parameterType="String" resultMap="questionRM">
+    <select id="get" parameterType="int" resultMap="questionRM">
         select * from problem
-        where pro_no=#{id}
+        where pro_no=#{questionId}
     </select>
 
     <!-- 删除一条记录 -->
     <delete id="delete" parameterType="string">
         delete from problem
-        where pro_no=#{id}
+        where pro_no=#{questionId}
     </delete>
 
     <!-- 随机生成相应数量的题目 -->
