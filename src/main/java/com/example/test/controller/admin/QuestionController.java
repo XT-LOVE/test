@@ -55,30 +55,7 @@ public class QuestionController extends BaseController {
 		model.addAttribute("pageInfo", pageInfo);
 		return pageInfo;
 	}
-	
-	/**
-	 * 跳转到题库管理页面
-	 * @param model
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("/quesPage.action")
-	public List<Question> quesPage(@RequestParam(value="page", defaultValue="1") int page,
-			Model model, HttpSession session){
-//		List<Question> dataList = questionService.find(question);
-		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
-		List<Question> dataList = pageInfo.getList();
-//		Type type=null;
-//		for(Question que : dataList){
-//			String typeName="";
-//			type = typeService.get(Integer.parseInt(que.getTypeId()));
-//			typeName=type.getTypeName();
-//			que.setTypeId(typeName);
-//		}
-		model.addAttribute("dataList", dataList);
-		model.addAttribute("pageInfo", pageInfo);
-		return dataList;			
-	}
+
 	
 	/**
 	 * 删除问题信息
