@@ -18,16 +18,19 @@ public class ManagerServiceImpl implements ManagerService {
 	@Autowired
 	ManagerDao managerDao;
 
+	@Override
 	public List<Manager> find() {
 		// TODO Auto-generated method stub
 		return managerDao.find();
 	}
 
+	@Override
 	public Manager get(Serializable id) {
 		// TODO Auto-generated method stub
 		return managerDao.get(id);
 	}
 
+	@Override
 	public void insert(Manager manager) {
 		String managerPwd = manager.getMana_pwd();
 		//密码加密
@@ -36,21 +39,25 @@ public class ManagerServiceImpl implements ManagerService {
 		managerDao.insert(manager);
 	}
 
+	@Override
 	public void update(Manager manager) {
 		// TODO Auto-generated method stub
 		managerDao.update(manager);
 	}
 
+	@Override
 	public void delete(Serializable id) {
 		// TODO Auto-generated method stub
 		managerDao.delete(id);
 	}
 
+	@Override
 	public void delete(Serializable[] ids) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public Manager login(Manager manager) {
 		// TODO Auto-generated method stub
 		Manager u = get(manager.getMana_no());
@@ -63,6 +70,7 @@ public class ManagerServiceImpl implements ManagerService {
 		return null;
 	}
 
+	@Override
 	public PageInfo<Manager> findByPage(Manager manager, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;

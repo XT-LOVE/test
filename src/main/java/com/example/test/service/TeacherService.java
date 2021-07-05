@@ -7,27 +7,20 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface TeacherService {
-	public static List<Teacher> find() {
-		return null;
-	}
 
-	public static Teacher get(Serializable id) {
-		return null;
-	}
+	List<Teacher> find();
 
-	public static void insert(Teacher teacher) {
-	}
+	Teacher get(Serializable id);
 
-	public static void update(Teacher teacher) {
+	void insert(Teacher teacher);
 
-	}
+	void update(Teacher teacher);
 
-	public static void delete(Serializable id) {
+	void delete(Serializable id);
 
-	}
+	void delete(Serializable[] ids);
 
-	public void delete(Serializable[] ids);
-	public Teacher login(Teacher teacher);
-	/**分页查询学生信息*/
-	public PageInfo<Teacher> findByPage(Teacher teacher, Integer pageNo, Integer pageSize);
+	Teacher login(Teacher teacher);
+
+	PageInfo<Teacher> findByPage(Teacher teacher, Integer pageNo, Integer pageSize);
 }

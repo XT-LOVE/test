@@ -17,11 +17,12 @@ import java.util.List;
 @RestController
 public class StudentController extends BaseController{
 
+	private StudentService studentService;
 	//验证学生账号是否存在
 	@PostMapping("/student?method=checkAccount")
 	@ResponseBody
-	public ApiResult checkAccount(String stu_no){
-		Student student = StudentService.get(stu_no);
+	public ApiResult checkAccount(int stu_no){
+		Student student = studentService.get(stu_no);
 		if(student!=null){
 			return ApiResultHandler.buildApiResult(200, "账号存在", student);
 		}else{
@@ -33,7 +34,7 @@ public class StudentController extends BaseController{
 	@PostMapping("/student?method=checkPwd")
 	@ResponseBody
 	public ApiResult checkPwd(Login login){
-		Student student = StudentService.get(login.getUsername());
+		Student student = studentService.get(login.getUsername());
 		if(student!=null){
 			return ApiResultHandler.buildApiResult(200, "密码正确", student);
 		} else{
@@ -45,7 +46,7 @@ public class StudentController extends BaseController{
 	@GetMapping("/student?method=getStuInfo")
 	@ResponseBody
 	public ApiResult findById(int stu_no) {
-		Student student = StudentService.get(stu_no);
+		Student student = studentService.get(stu_no);
 		if (student != null) {
 			return ApiResultHandler.buildApiResult(200,"请求成功",student);
 		} else {
@@ -57,7 +58,7 @@ public class StudentController extends BaseController{
 	@GetMapping("/student?method=getAllStuInfo")
 	@ResponseBody
 	public ApiResult findAll() {
-		List<Student> studentList = StudentService.find();
+		List<Student> studentList = studentService.find();
 		return  ApiResultHandler.buildApiResult(200,"查询所有学生",studentList);
 	}
 
@@ -65,7 +66,7 @@ public class StudentController extends BaseController{
 	@PostMapping("/student?method=addStu")
 	@ResponseBody
 	public ApiResult addStu(Student student){
-		StudentService.insert(student);
+		studentService.insert(student);
 		return ApiResultHandler.buildApiResult(200,"添加成功",null);
 	}
 
@@ -76,7 +77,7 @@ public class StudentController extends BaseController{
 		if(stu_no != null){
 			String ids[] = stu_no.split(",");
 			for(int i=0;i<ids.length;i++){
-				StudentService.delete(ids[i]);
+				studentService.delete(ids[i]);
 			}
 		}
 		return ApiResultHandler.buildApiResult(200,"删除成功",null);
@@ -86,8 +87,8 @@ public class StudentController extends BaseController{
 	@PutMapping("student?method=updateStu")
 	@ResponseBody
 	public ApiResult updateStu(Student student){
-		StudentService.update(student);
+		studentService.update(student);
 		return ApiResultHandler.buildApiResult(200,"更新成功",null);
 	}
-	
+
 }

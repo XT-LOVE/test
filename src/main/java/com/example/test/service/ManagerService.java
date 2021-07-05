@@ -7,27 +7,19 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface ManagerService {
-	public static List<Manager> find() {
-		return null;
-	}
+	List<Manager> find();
 
-	public static Manager get(Serializable id) {
-		return null;
-	}
+	Manager get(Serializable id);
 
-	public static void insert(Manager manager) {
-	}
+	void insert(Manager manager);
 
-	public static void update(Manager manager) {
+	void update(Manager manager);
 
-	}
+	void delete(Serializable id);
 
-	public static void delete(Serializable id) {
+	void delete(Serializable[] ids);
 
-	}
+	Manager login(Manager manager);
 
-	public void delete(Serializable[] ids);
-	public Manager login(Manager manager);
-	/**分页查询学生信息*/
-	public PageInfo<Manager> findByPage(Manager manager, Integer pageNo, Integer pageSize);
+	PageInfo<Manager> findByPage(Manager manager, Integer pageNo, Integer pageSize);
 }

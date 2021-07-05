@@ -17,16 +17,19 @@ public class TeacherServiceImpl implements TeacherService {
 	@Autowired
 	TeacherDao teacherDao;
 
+	@Override
 	public List<Teacher> find() {
 		// TODO Auto-generated method stub
 		return teacherDao.find();
 	}
 
+	@Override
 	public Teacher get(Serializable id) {
 		// TODO Auto-generated method stub
 		return teacherDao.get(id);
 	}
 
+	@Override
 	public void insert(Teacher teacher) {
 		String teacherPwd = teacher.getTea_pwd();
 		//密码加密
@@ -35,21 +38,25 @@ public class TeacherServiceImpl implements TeacherService {
 		teacherDao.insert(teacher);
 	}
 
+	@Override
 	public void update(Teacher teacher) {
 		// TODO Auto-generated method stub
 		teacherDao.update(teacher);
 	}
 
+	@Override
 	public void delete(Serializable id) {
 		// TODO Auto-generated method stub
 		teacherDao.delete(id);
 	}
 
+	@Override
 	public void delete(Serializable[] ids) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public Teacher login(Teacher teacher) {
 		// TODO Auto-generated method stub
 		Teacher u = get(teacher.getTea_no());
@@ -62,6 +69,7 @@ public class TeacherServiceImpl implements TeacherService {
 		return null;
 	}
 
+	@Override
 	public PageInfo<Teacher> findByPage(Teacher teacher, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;

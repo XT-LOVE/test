@@ -1,43 +1,33 @@
 package com.example.test.service;
 
+import com.example.test.dao.StudentDao;
+import com.example.test.entity.Student;
+import com.example.test.pagination.Page;
+import com.example.test.util.MD5Util;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.io.Serializable;
 import java.util.List;
 
-import com.github.pagehelper.PageInfo;
-
-import com.example.test.entity.Student;
-import org.springframework.stereotype.Component;
-
 public interface StudentService {
-	public static List<Student> find() {
-		return null;
-	}
 
-	public static Student get(Serializable id) {
-		return null;
-	}
+	//查询所有学生
+	List<Student> find();
 
-	public static void insert(Student student) {
+	//查询单个学生
+	Student get(Serializable id);
 
-	}
+	void insert(Student student);
 
-	public static void update(Student student) {
+	void update(Student student);
 
-	}
+	void delete(Serializable id);
 
-	public static void delete(Serializable id) {
+	void delete(Serializable[] ids);
 
-	}
+	Student login(Student student);
 
-	public void delete(Serializable[] ids);
-
-	public static Student login(Student student) {
-		return null;
-	}
-
-	//分页查询学生信息
-	public static PageInfo<Student> findByPage(Student student, Integer pageNo, Integer pageSize) {
-		return null;
-	}
-
-	}
+	PageInfo<Student> findByPage(Student student, Integer pageNo, Integer pageSize);
+}
