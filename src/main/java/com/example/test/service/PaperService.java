@@ -22,5 +22,5 @@ public interface PaperService {
 	//更新试卷信息
 	public void updatePaper(Map map);
 
-	public PageInfo<Paper> findAllPage(Paper paper, Integer pageNo,Integer pageSize);
+	public PageInfo<Paper> findByPage(Integer pageNo,Integer pageSize);
 }

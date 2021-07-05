@@ -43,7 +43,7 @@ public class PaperServiceImpl implements PaperService {
 		paperDao.delete(ids);
 	}
 
-/*	public List<Paper> getUserPaperById(Serializable id) {
+/*	public List<PapebyUserPaperById(Serializable id) {
 		// TODO Auto-generated method stub
 		return paperDao.getUserPaperById(id);
 	}*/
@@ -70,7 +70,7 @@ public class PaperServiceImpl implements PaperService {
 	}
 
 */
-	public PageInfo<Paper> findAllPage(Paper paper, Integer pageNo,
+	public PageInfo<Paper> findByPage(Integer pageNo,
 			Integer pageSize) {
 		pageNo = pageNo == null?1:pageNo;
 	    pageSize = pageSize == null?10:pageSize;
