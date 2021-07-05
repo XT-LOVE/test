@@ -6,10 +6,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.pagehelper.PageInfo;
 
@@ -22,6 +21,7 @@ import com.example.test.service.QuestionService;
  *
  */
 @Controller
+@Repository
 public class QuestionController extends BaseController {
 
 	@Autowired
@@ -35,7 +35,7 @@ public class QuestionController extends BaseController {
 	 */
 	@RequestMapping("/toQuestionPage.action")
 	public String toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
-			Question question,Model model, HttpSession session){
+			Question question, Model model, HttpSession session){
 //		List<Question> dataList = questionService.find(question);
 		PageInfo<Question> pageInfo = questionService.findByPage(question, page, 5);
 		List<Question> dataList = pageInfo.getList();
@@ -63,7 +63,6 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/quesPage.action")
-	@ResponseBody
 	public List<Question> quesPage(@RequestParam(value="page", defaultValue="1") int page,
 			Question question,Model model, HttpSession session){
 //		List<Question> dataList = questionService.find(question);
@@ -133,13 +132,13 @@ public class QuestionController extends BaseController {
 	 * @param session session
 	 * @return return
 	 */
-	@RequestMapping("/toQryQuestion.action")
-	public String toQryQuestion(int questionId, Model model, HttpSession session){
+	@RequestMapping(value = "/toQryQuestion/{id}", method = RequestMethod.GET)
+	public Question toQryQuestion(@PathVariable("id") int questionId, Model model, HttpSession session){
 		Question questionInfo = questionService.get(questionId);
 //		Type type = typeService.get(Integer.parseInt(questionInfo.getTypeId()));
 //		questionInfo.setTypeId(type.getTypeName());
 		model.addAttribute("question", questionInfo);
-		return "/admin/question-qry.jsp";			
+		return questionInfo;
 	}
 	
 	/**
