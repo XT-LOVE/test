@@ -1,7 +1,9 @@
 package com.example.test.controller.admin;
 
+import java.io.IOException;
 import java.util.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +37,7 @@ public class PaperController {
 	 */
 	@RequestMapping("/toPaperPage.action")
 	public PageInfo<Paper> toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
-			Paper paper,Model model, HttpSession session){
+			Model model, HttpSession session){
 		PageInfo<Paper> pageInfo = paperService.findByPage(page, 5);
 		List<Paper> dataList = pageInfo.getList();
 //		List<Paper> dataList = paperService.find(paper);
@@ -94,19 +96,19 @@ public class PaperController {
 		return dataList;			
 	}*/
 	
-	/**
+/*	*//**
 	 * 跳转到新增试卷页面
 	 * @param paper
 	 * @param model
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/toAddPaperPage.action")
 	@ResponseBody
 	public String toAddPaperPage(Paper paper,Model model, HttpSession session){
 //		model.addAttribute("type", typeService.find(new Type()));
 		return "/admin/paper-reg.jsp";
-	}
+	}*/
 	
 	/**
 	 * 新增试卷
@@ -121,7 +123,8 @@ public class PaperController {
 	public String addPaper(@RequestParam List<String> ch_no,
 						   @RequestParam List<String> type,
 						   @RequestParam int dif,
-						   Paper paper,Model model, HttpSession session){
+						   Paper paper,Model model, HttpSession session,
+						   HttpServletResponse response) throws IOException {
 		Map map = new HashMap();
 		List<Question> paperList = new ArrayList<Question>();
 //		map.put("gradeId", paper.getGradeId());
@@ -139,6 +142,7 @@ public class PaperController {
 		}
 		paper.setQuestionId(quesId);
 		paperService.insert(paper);
+		response.sendRedirect("/toPaperPage.action");
 		return "redirect:/toPaperPage.action";
 	}
 	
@@ -150,13 +154,14 @@ public class PaperController {
 	 */
 	@RequestMapping("/deletePaper.action")
 	@ResponseBody
-	public String deletePaper(String paperId, Model model){
+	public String deletePaper(String paperId, Model model,HttpServletResponse response) throws IOException {
 		if(paperId != null){
 			String ids[] = paperId.split(",");
 			for(int i=0;i<ids.length;i++){
 				paperService.delete(ids[i]);
 			}
 		}
+		response.sendRedirect("/toPaperPage.action");
 		return "redirect:/toPaperPage.action";
 	} 
 	/*

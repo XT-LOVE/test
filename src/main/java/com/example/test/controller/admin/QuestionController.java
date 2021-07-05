@@ -103,7 +103,7 @@ public class QuestionController extends BaseController {
 		Question que = new Question();
 		// = questionService.get(que.getQuestionId())
 		if(que!=null) {
-			response.sendRedirect("redirect:/toQuestionPage.action");
+			response.sendRedirect("/toQuestionPage.action");
 			return "成功";
 		}
 		questionService.insert(question);
