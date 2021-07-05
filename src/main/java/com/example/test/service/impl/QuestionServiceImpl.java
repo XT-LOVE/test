@@ -17,7 +17,7 @@ public class QuestionServiceImpl implements QuestionService {
 	@Autowired
 	QuestionDao questionDao;
 	
-	public List<Question> find(Question question) {
+	public List<Question> find() {
 		return questionDao.find();
 	}
 
@@ -40,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return  questionDao.createPaper(ch_no,type,paperDif);
 	}
 
-	public PageInfo<Question> findByPage(Question question, Integer pageNo,
+	public PageInfo<Question> findByPage(Integer pageNo,
 			Integer pageSize) {
 		
 		pageNo = pageNo == null?1:pageNo;
