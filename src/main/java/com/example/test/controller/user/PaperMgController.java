@@ -23,9 +23,6 @@ import com.example.test.entity.Question;
  */
 @Controller
 public class PaperMgController {
-
-	@Autowired
-	TeacherService userService;
 	@Autowired
 	PaperService paperService;
 	@Autowired
