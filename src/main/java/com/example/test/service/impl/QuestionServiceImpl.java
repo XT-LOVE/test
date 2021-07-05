@@ -11,7 +11,7 @@ import com.github.pagehelper.PageInfo;
 import com.example.test.dao.QuestionDao;
 import com.example.test.entity.Question;
 import com.example.test.service.QuestionService;
-@Service
+@Service("QuestionService")
 public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
