@@ -11,13 +11,13 @@ import com.github.pagehelper.PageInfo;
 import com.example.test.dao.QuestionDao;
 import com.example.test.entity.Question;
 import com.example.test.service.QuestionService;
-@Service
+@Service("QuestionService")
 public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
 	QuestionDao questionDao;
 	
-	public List<Question> find(Question question) {
+	public List<Question> find() {
 		return questionDao.find();
 	}
 
@@ -40,7 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
 		return  questionDao.createPaper(ch_no,type,paperDif);
 	}
 
-	public PageInfo<Question> findByPage(Question question, Integer pageNo,
+	public PageInfo<Question> findByPage(Integer pageNo,
 			Integer pageSize) {
 		
 		pageNo = pageNo == null?1:pageNo;
@@ -49,8 +49,8 @@ public class QuestionServiceImpl implements QuestionService {
 	    List<Question> list = questionDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
-	    PageInfo<Question> page = new PageInfo<Question>(list);
-	    return page;
+		PageInfo<Question> pageInfo = new PageInfo<>(list);
+	    return pageInfo;
 	}
 
 }

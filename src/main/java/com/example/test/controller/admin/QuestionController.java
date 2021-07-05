@@ -1,15 +1,16 @@
 package com.example.test.controller.admin;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.pagehelper.PageInfo;
 
@@ -21,23 +22,25 @@ import com.example.test.service.QuestionService;
  * 题库管理
  *
  */
-@Controller
+//@Controller
+//@Repository
+	@RestController
 public class QuestionController extends BaseController {
 
 	@Autowired
 	QuestionService questionService;
 	/**
 	 * 跳转到题库管理页面
-	 * @param question
 	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/toQuestionPage.action")
-	public String toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
-			Question question,Model model, HttpSession session){
-//		List<Question> dataList = questionService.find(question);
-		PageInfo<Question> pageInfo = questionService.findByPage(question, page, 5);
+	public PageInfo<Question> toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
+			Model model, HttpSession session){
+//		List<Question> dataList = questionService.find();
+		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
+//		PageInfo<Video> pageInfo = new PageInfo<>(list);
 		List<Question> dataList = pageInfo.getList();
 //		Type type=null;
 //		String type;
@@ -52,34 +55,9 @@ public class QuestionController extends BaseController {
 //		}
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
-		return "/admin/question-mgt.jsp";			
+		return pageInfo;
 	}
-	
-	/**
-	 * 跳转到题库管理页面
-	 * @param question
-	 * @param model
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping("/quesPage.action")
-	@ResponseBody
-	public List<Question> quesPage(@RequestParam(value="page", defaultValue="1") int page,
-			Question question,Model model, HttpSession session){
-//		List<Question> dataList = questionService.find(question);
-		PageInfo<Question> pageInfo = questionService.findByPage(question, page, 5);
-		List<Question> dataList = pageInfo.getList();
-//		Type type=null;
-//		for(Question que : dataList){
-//			String typeName="";
-//			type = typeService.get(Integer.parseInt(que.getTypeId()));
-//			typeName=type.getTypeName();
-//			que.setTypeId(typeName);
-//		}
-		model.addAttribute("dataList", dataList);
-		model.addAttribute("pageInfo", pageInfo);
-		return dataList;			
-	}
+
 	
 	/**
 	 * 删除问题信息
@@ -99,19 +77,17 @@ public class QuestionController extends BaseController {
 	} 
 	/**
 	 * 跳转到添加试题信息页面
-	 * @param question
 	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/toAddQuestion.action")
-	public String toAddQuestion(Question question, Model model, HttpSession session){
+	public List<Question> toAddQuestion(Question question,Model model, HttpSession session){
 		//获取问题信息
-		List<Question> dataList = questionService.find(question);
-		//获取题型信息
+		List<Question> dataList = questionService.find();
 //		model.addAttribute("type", typeService.find(new Type()));
 		model.addAttribute("dataList", dataList);
-		return "/admin/question-reg.jsp";			
+		return dataList;
 	}
 	
 	/**
@@ -121,9 +97,17 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/addQuesInfo.action")
-	public String addQuesInfo(Question question, Model model){
+	public String addQuesInfo(Question question, Model model, HttpServletResponse response) throws IOException {
+		//TODO 首先插入答案
+
+		Question que = new Question();
+		// = questionService.get(que.getQuestionId())
+		if(que!=null) {
+			response.sendRedirect("redirect:/toQuestionPage.action");
+			return "成功";
+		}
 		questionService.insert(question);
-		return "redirect:/toQuestionPage.action";			
+		return "失败";
 	}
 	
 	/**
@@ -133,13 +117,14 @@ public class QuestionController extends BaseController {
 	 * @param session session
 	 * @return return
 	 */
-	@RequestMapping("/toQryQuestion.action")
-	public String toQryQuestion(int questionId, Model model, HttpSession session){
+	@RequestMapping(value = "/toQryQuestion/{id}", method = RequestMethod.GET)
+	public Question toQryQuestion(@PathVariable("id") int questionId, Model model, HttpSession session){
 		Question questionInfo = questionService.get(questionId);
 //		Type type = typeService.get(Integer.parseInt(questionInfo.getTypeId()));
 //		questionInfo.setTypeId(type.getTypeName());
 		model.addAttribute("question", questionInfo);
-		return "/admin/question-qry.jsp";			
+		System.out.println(questionInfo);
+		return questionInfo;
 	}
 	
 	/**
