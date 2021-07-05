@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 /**
  * @CreateDate:	2017-3-11
  */
-public abstract class BaseController {
+public class BaseController {
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

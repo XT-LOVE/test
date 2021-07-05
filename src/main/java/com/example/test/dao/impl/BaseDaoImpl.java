@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Repository
-public abstract class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
+public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 	@Autowired
 	public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory){
 		super.setSqlSessionFactory(sqlSessionFactory);

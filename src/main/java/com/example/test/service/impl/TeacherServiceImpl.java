@@ -12,11 +12,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Service
-public abstract class TeacherServiceImpl implements TeacherService {
+public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	TeacherDao teacherDao;
-	
+
 	public List<Teacher> find() {
 		// TODO Auto-generated method stub
 		return teacherDao.find();
@@ -47,7 +47,7 @@ public abstract class TeacherServiceImpl implements TeacherService {
 
 	public void delete(Serializable[] ids) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Teacher login(Teacher teacher) {
@@ -65,13 +65,13 @@ public abstract class TeacherServiceImpl implements TeacherService {
 	public PageInfo<Teacher> findByPage(Teacher teacher, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Teacher> list = teacherDao.find();
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Teacher> page = new PageInfo<Teacher>(list);
-	    return page;
+		pageSize = pageSize == null?10:pageSize;
+		PageHelper.startPage(pageNo, pageSize);
+		List<Teacher> list = teacherDao.find();
+		System.out.println(list.toString());
+		//用PageInfo对结果进行包装
+		PageInfo<Teacher> page = new PageInfo<Teacher>(list);
+		return page;
 	}
 
 }

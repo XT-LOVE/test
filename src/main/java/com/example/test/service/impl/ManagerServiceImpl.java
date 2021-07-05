@@ -13,11 +13,11 @@ import java.io.Serializable;
 import java.util.List;
 
 @Service
-public abstract class ManagerServiceImpl implements ManagerService {
+public class ManagerServiceImpl implements ManagerService {
 
 	@Autowired
 	ManagerDao managerDao;
-	
+
 	public List<Manager> find() {
 		// TODO Auto-generated method stub
 		return managerDao.find();
@@ -48,7 +48,7 @@ public abstract class ManagerServiceImpl implements ManagerService {
 
 	public void delete(Serializable[] ids) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Manager login(Manager manager) {
@@ -66,13 +66,13 @@ public abstract class ManagerServiceImpl implements ManagerService {
 	public PageInfo<Manager> findByPage(Manager manager, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Manager> list = managerDao.find();
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Manager> page = new PageInfo<Manager>(list);
-	    return page;
+		pageSize = pageSize == null?10:pageSize;
+		PageHelper.startPage(pageNo, pageSize);
+		List<Manager> list = managerDao.find();
+		System.out.println(list.toString());
+		//用PageInfo对结果进行包装
+		PageInfo<Manager> page = new PageInfo<Manager>(list);
+		return page;
 	}
 
 

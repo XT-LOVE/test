@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import com.example.test.service.StudentService;
+import com.example.test.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.test.entity.Paper;
 import com.example.test.entity.Question;
-import com.example.test.service.PaperService;
-import com.example.test.service.QuestionService;
-import com.example.test.service.ManagerService;
 
 /**
  * 试卷综合管理
@@ -28,7 +25,7 @@ import com.example.test.service.ManagerService;
 public class PaperMgController {
 
 	@Autowired
-	StudentService userService;
+	TeacherService userService;
 	@Autowired
 	PaperService paperService;
 	@Autowired

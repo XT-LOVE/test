@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.List;
 @Service
-public abstract class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService {
 
 	@Autowired
 	StudentDao studentDao;
@@ -49,7 +49,7 @@ public abstract class StudentServiceImpl implements StudentService {
 
 	public void delete(Serializable[] ids) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Student login(Student student) {
@@ -67,13 +67,13 @@ public abstract class StudentServiceImpl implements StudentService {
 	public PageInfo<Student> findByPage(Student student, Integer pageNo, Integer pageSize) {
 		// TODO Auto-generated method stub
 		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Student> list = studentDao.find();
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Student> page = new PageInfo<Student>(list);
-	    return page;
+		pageSize = pageSize == null?10:pageSize;
+		PageHelper.startPage(pageNo, pageSize);
+		List<Student> list = studentDao.find();
+		System.out.println(list.toString());
+		//用PageInfo对结果进行包装
+		PageInfo<Student> page = new PageInfo<Student>(list);
+		return page;
 	}
 
 }

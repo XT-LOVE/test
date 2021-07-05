@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @MapperScan("com.example.test.dao")
-@ComponentScan(basePackages = { "com.example.test.service.*" })
+//@ComponentScan(basePackages = { "com.example.test.service.*" })
 @SpringBootApplication()
 
 public class TestpaperApplication {
