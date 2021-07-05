@@ -20,21 +20,15 @@ public class StudentServiceImpl implements StudentService {
     @Override
     //查询所有学生
     public List<Student> find() {
-        // TODO Auto-generated method stub
         return studentDao.find();
     }
     @Override
     //查询单个学生
-    public Student get(Serializable id) {
-        // TODO Auto-generated method stub
+    public Student get(String id) {
         return studentDao.get(id);
     }
     @Override
     public void insert(Student student) {
-        String studentPwd = student.getStu_pwd();
-        //密码加密
-        studentPwd = MD5Util.getData(studentPwd);
-        student.setStu_pwd(studentPwd);
         studentDao.insert(student);
     }
     @Override
@@ -43,14 +37,9 @@ public class StudentServiceImpl implements StudentService {
         studentDao.update(student);
     }
     @Override
-    public void delete(Serializable id) {
+    public void delete(String id) {
         // TODO Auto-generated method stub
         studentDao.delete(id);
-    }
-    @Override
-    public void delete(Serializable[] ids) {
-        // TODO Auto-generated method stub
-
     }
     @Override
     public Student login(Student student) {

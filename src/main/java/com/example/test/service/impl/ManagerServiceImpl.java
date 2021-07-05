@@ -32,10 +32,6 @@ public class ManagerServiceImpl implements ManagerService {
 
 	@Override
 	public void insert(Manager manager) {
-		String managerPwd = manager.getMana_pwd();
-		//密码加密
-		managerPwd = MD5Util.getData(managerPwd);
-		manager.setMana_pwd(managerPwd);
 		managerDao.insert(manager);
 	}
 

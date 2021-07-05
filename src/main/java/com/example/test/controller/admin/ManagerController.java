@@ -6,6 +6,7 @@ import com.example.test.entity.Login;
 import com.example.test.entity.Manager;
 import com.example.test.service.ManagerService;
 import com.example.test.util.ApiResultHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 public class ManagerController extends BaseController{
 
+	@Autowired
 	private ManagerService managerService;
 	//验证管理员账号是否存在
 	@PostMapping("/manager/checkAccount")
@@ -34,7 +36,7 @@ public class ManagerController extends BaseController{
 	//账号密码检查
 	@PostMapping("/manager/checkPwd")
 	@ResponseBody
-	public ApiResult checkPwd(Login login){
+	public ApiResult checkPwd(@RequestBody Login login){
 		Manager manager = managerService.get(login.getUsername());
 		if(manager!=null&manager.getMana_pwd().equals( login.getPassword())){
 			return ApiResultHandler.buildApiResult(200, "密码正确", manager);
@@ -44,9 +46,9 @@ public class ManagerController extends BaseController{
 	}
 
 	//获取单个管理员信息
-	@GetMapping("/manager/getManInfo")
+	@PostMapping("/manager/getManInfo")
 	@ResponseBody
-	public ApiResult findById(int mana_no) {
+	public ApiResult findById(String mana_no) {
 		Manager manager = managerService.get(mana_no);
 		if (manager != null) {
 			return ApiResultHandler.buildApiResult(200,"请求成功",manager);
@@ -66,7 +68,7 @@ public class ManagerController extends BaseController{
 	//添加管理员信息
 	@PostMapping("/manager/addMan")
 	@ResponseBody
-	public ApiResult addMan(Manager manager){
+	public ApiResult addMan(@RequestBody Manager manager){
 		managerService.insert(manager);
 		return ApiResultHandler.buildApiResult(200,"添加成功",null);
 	}
@@ -87,7 +89,7 @@ public class ManagerController extends BaseController{
 	//修改管理员信息
 	@PutMapping("manager/updateMan")
 	@ResponseBody
-	public ApiResult updateMan(Manager manager){
+	public ApiResult updateMan(@RequestBody Manager manager){
 		managerService.update(manager);
 		return ApiResultHandler.buildApiResult(200,"更新成功",null);
 	}

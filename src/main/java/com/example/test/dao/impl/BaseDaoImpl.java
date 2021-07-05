@@ -24,26 +24,28 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 		this.ns = ns;
 	}
 
+	@Override
 	public List<T> find() {
 		List<T> oList = this.getSqlSession().selectList(ns + "find");
 		return oList;
 	}
+	@Override
 	public T get(Serializable id) {
 		return this.getSqlSession().selectOne(ns + "get", id);
 	}
-
+    @Override
 	public void insert(T entity) {
 		this.getSqlSession().insert(ns + "insert", entity);
 	}
-
+    @Override
 	public void update(T entity) {
 		this.getSqlSession().update(ns + "update", entity);
 	}
-
+    @Override
 	public void delete(Serializable id) {
 		this.getSqlSession().delete(ns + "delete", id);
 	}
-
+    @Override
 	public void delete(Serializable[] ids) {
 		this.getSqlSession().delete(ns + "deleteBatch", ids);
 	}

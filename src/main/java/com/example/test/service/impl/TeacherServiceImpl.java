@@ -31,10 +31,6 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void insert(Teacher teacher) {
-		String teacherPwd = teacher.getTea_pwd();
-		//密码加密
-		teacherPwd = MD5Util.getData(teacherPwd);
-		teacher.setTea_pwd(teacherPwd);
 		teacherDao.insert(teacher);
 	}
 

@@ -6,6 +6,7 @@ import com.example.test.entity.Login;
 import com.example.test.entity.Teacher;
 import com.example.test.service.TeacherService;
 import com.example.test.util.ApiResultHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +19,12 @@ import java.util.List;
 @RestController
 public class TeacherController extends BaseController{
 
+	@Autowired
 	private TeacherService teacherService;
 	//验证教师账号是否存在
 	@PostMapping("/teacher/checkAccount")
 	@ResponseBody
-	public ApiResult checkAccount(int tea_no){
+	public ApiResult checkAccount(String tea_no){
 		Teacher teacher = teacherService.get(tea_no);
 		if(teacher!=null){
 			return ApiResultHandler.buildApiResult(200, "账号存在", teacher);
@@ -34,9 +36,9 @@ public class TeacherController extends BaseController{
 	//账号密码检查
 	@PostMapping("/teacher/checkPwd")
 	@ResponseBody
-	public ApiResult checkPwd(Login login){
+	public ApiResult checkPwd(@RequestBody Login login){
 		Teacher teacher = teacherService.get(login.getUsername());
-		if(teacher!=null&teacher.getTea_pwd().equals(login.getPassword())){
+		if(teacher.getTea_pwd().equals(login.getPassword())){
 			return ApiResultHandler.buildApiResult(200, "密码正确", teacher);
 		} else{
 			return ApiResultHandler.buildApiResult(404, "密码错误", null);
@@ -44,9 +46,9 @@ public class TeacherController extends BaseController{
 	}
 
 	//获取单个教师信息
-	@GetMapping("/teacher/getTeaInfo")
+	@PostMapping("/teacher/getTeaInfo")
 	@ResponseBody
-	public ApiResult findById(int tea_no) {
+	public ApiResult findById(String tea_no) {
 		Teacher teacher = teacherService.get(tea_no);
 		if (teacher != null) {
 			return ApiResultHandler.buildApiResult(200,"请求成功",teacher);
@@ -66,7 +68,7 @@ public class TeacherController extends BaseController{
 	//添加教师信息
 	@PostMapping("/teacher/addTea")
 	@ResponseBody
-	public ApiResult addTea(Teacher teacher){
+	public ApiResult addTea(@RequestBody Teacher teacher){
 		teacherService.insert(teacher);
 		return ApiResultHandler.buildApiResult(200,"添加成功",null);
 	}
@@ -87,7 +89,7 @@ public class TeacherController extends BaseController{
 	//修改教师信息
 	@PutMapping("teacher/updateTea")
 	@ResponseBody
-	public ApiResult updateTea(Teacher teacher){
+	public ApiResult updateTea(@RequestBody Teacher teacher){
 		teacherService.update(teacher);
 		return ApiResultHandler.buildApiResult(200,"更新成功",null);
 	}

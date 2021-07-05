@@ -2,7 +2,7 @@ package com.example.test.service;
 
 import com.example.test.dao.StudentDao;
 import com.example.test.entity.Student;
-import com.example.test.pagination.Page;
+import com.example.test.pagination.MyBatisConfig;
 import com.example.test.util.MD5Util;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -17,15 +17,13 @@ public interface StudentService {
 	List<Student> find();
 
 	//查询单个学生
-	Student get(Serializable id);
+	Student get(String id);
 
 	void insert(Student student);
 
 	void update(Student student);
 
-	void delete(Serializable id);
-
-	void delete(Serializable[] ids);
+	void delete(String id);
 
 	Student login(Student student);
 

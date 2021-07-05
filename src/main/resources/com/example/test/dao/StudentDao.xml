@@ -52,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 查询一个录 -->
-	<select id="get" parameterType="com.example.test.entity.Student" resultMap="userRM">
+	<select id="get" parameterType="string" resultMap="userRM">
 		select * from student
 		where stu_no=#{stu_no}
 	</select>

@@ -3,6 +3,8 @@
  */
 package com.example.test.entity;
 
+import org.omg.PortableInterceptor.INACTIVE;
+
 /**
  * 学生表
  */
@@ -51,7 +53,7 @@ public class Student
 	}
 	
 	
-	public Student(String stu_no,String stu_name,String stu_pwd,String stu_discipline,String stu_grade) {
+	public Student(String stu_no, String stu_name, String stu_pwd, String stu_discipline, String stu_grade) {
 		super();
 		this.stu_no = stu_no;
 		this.stu_name = stu_name;

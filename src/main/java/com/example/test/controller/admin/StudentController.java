@@ -6,6 +6,7 @@ import com.example.test.entity.Login;
 import com.example.test.entity.Student;
 import com.example.test.service.StudentService;
 import com.example.test.util.ApiResultHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,11 +18,12 @@ import java.util.List;
 @RestController
 public class StudentController extends BaseController{
 
+	@Autowired
 	private StudentService studentService;
 	//验证学生账号是否存在
-	@PostMapping("/student?method=checkAccount")
+	@PostMapping("/student/checkAccount")
 	@ResponseBody
-	public ApiResult checkAccount(int stu_no){
+	public ApiResult checkAccount(String stu_no){
 		Student student = studentService.get(stu_no);
 		if(student!=null){
 			return ApiResultHandler.buildApiResult(200, "账号存在", student);
@@ -31,11 +33,11 @@ public class StudentController extends BaseController{
 	}
 
 	//账号密码检查
-	@PostMapping("/student?method=checkPwd")
+	@PostMapping("/student/checkPwd")
 	@ResponseBody
-	public ApiResult checkPwd(Login login){
+	public ApiResult checkPwd(@RequestBody Login login){
 		Student student = studentService.get(login.getUsername());
-		if(student!=null){
+		if(student.getStu_pwd().equals(login.getPassword())){
 			return ApiResultHandler.buildApiResult(200, "密码正确", student);
 		} else{
 			return ApiResultHandler.buildApiResult(404, "密码错误", null);
@@ -43,9 +45,9 @@ public class StudentController extends BaseController{
 	}
 
 	//获取单个学生信息
-	@GetMapping("/student?method=getStuInfo")
+	@PostMapping("/student/getStuInfo")
 	@ResponseBody
-	public ApiResult findById(int stu_no) {
+	public ApiResult findById(String stu_no) {
 		Student student = studentService.get(stu_no);
 		if (student != null) {
 			return ApiResultHandler.buildApiResult(200,"请求成功",student);
@@ -55,7 +57,7 @@ public class StudentController extends BaseController{
 	}
 
 	//获取所有的学生信息
-	@GetMapping("/student?method=getAllStuInfo")
+	@GetMapping("/student/getAllStuInfo")
 	@ResponseBody
 	public ApiResult findAll() {
 		List<Student> studentList = studentService.find();
@@ -63,15 +65,15 @@ public class StudentController extends BaseController{
 	}
 
 	//添加学生信息
-	@PostMapping("/student?method=addStu")
+	@PostMapping("/student/addStu")
 	@ResponseBody
-	public ApiResult addStu(Student student){
+	public ApiResult addStu(@RequestBody Student student){
 		studentService.insert(student);
 		return ApiResultHandler.buildApiResult(200,"添加成功",null);
 	}
 
 	//删除学生信息
-	@DeleteMapping("student?method=deleteStu")
+	@DeleteMapping("student/deleteStu")
 	@ResponseBody
 	public ApiResult deleteStu(String stu_no){
 		if(stu_no != null){
@@ -84,9 +86,9 @@ public class StudentController extends BaseController{
 	}
 
 	//修改学生信息
-	@PutMapping("student?method=updateStu")
+	@PutMapping("student/updateStu")
 	@ResponseBody
-	public ApiResult updateStu(Student student){
+	public ApiResult updateStu(@RequestBody Student student){
 		studentService.update(student);
 		return ApiResultHandler.buildApiResult(200,"更新成功",null);
 	}
