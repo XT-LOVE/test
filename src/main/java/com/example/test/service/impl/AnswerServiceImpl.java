@@ -4,10 +4,13 @@ import com.example.test.dao.AnswerDao;
 import com.example.test.entity.Answer;
 import com.example.test.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
-
+@Service("AnswerService")
+@Component
 public class AnswerServiceImpl implements AnswerService {
     @Autowired
     AnswerDao answerDao;

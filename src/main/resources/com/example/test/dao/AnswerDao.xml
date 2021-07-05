@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.test.dao.AnswerDao">
+    <!-- 数据库表映射 -->
+    <resultMap id="answerRM" type="com.example.test.entity.Answer">
+        <result property="answerId" column="ans_no"/>
+        <result property="answerDetail" column="ans_detail"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.example.test.entity.Answer">
+        insert into answer
+        (ans_detail)
+        values
+        (#{answerDetail})
+    </insert>
+
+    <update id="update" parameterType="com.example.test.entity.Answer">
+        update answer
+        <set>
+            <if test="answerDetail!=null">
+                ans_detail=#{answerDetail},
+            </if>
+        </set>
+        where ans_no=#{answerId}
+    </update>
+
+    <select id="find" resultMap="answerRM">
+        select * from answer
+        where 1=1
+    </select>
+
+    <select id="get" parameterType="int" resultMap="answerRM">
+        select * from answer
+        where ans_no=#{answerId}
+    </select>
+
+    <!-- 删除一条记录 -->
+    <delete id="delete" parameterType="string">
+        delete from answer
+        where ans_no=#{answerId}
+    </delete>
+
+<!--    <delete id="deleteBatch" parameterType="List">-->
+<!--        delete from answer-->
+<!--        where ans_no in-->
+<!--        <foreach item="item" index="index" collection="answerId" open="(" separator="," close=")">-->
+<!--            #{item}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+</mapper>
