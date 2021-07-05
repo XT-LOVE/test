@@ -17,8 +17,9 @@ import com.example.test.entity.Paper;
 import com.example.test.entity.Question;
 import com.example.test.service.PaperService;
 import com.example.test.service.QuestionService;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class PaperController {
 
 	@Autowired
@@ -33,10 +34,9 @@ public class PaperController {
 	 * @return
 	 */
 	@RequestMapping("/toPaperPage.action")
-	@ResponseBody
-	public String toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
+	public PageInfo<Paper> toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
 			Paper paper,Model model, HttpSession session){
-		PageInfo<Paper> pageInfo = paperService.findAllPage(paper, page, 5);
+		PageInfo<Paper> pageInfo = paperService.findByPage(page, 5);
 		List<Paper> dataList = pageInfo.getList();
 //		List<Paper> dataList = paperService.find(paper);
 		/*for(Paper g : dataList){
@@ -56,25 +56,25 @@ public class PaperController {
 		}*/
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
-		return "/admin/paper-mgt.jsp";			
+		return pageInfo;
 	}
 	
-	
-	/**
+/*
+	*//**
 	 * 跳转到试卷管理页面
 	 * //@param course
 	 * @param model
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/qryAllPaper.action")
 	@ResponseBody
 	public List<Paper> qryAllPaper(@RequestParam(value="page", defaultValue="1") int page,
 			Paper paper,Model model, HttpSession session){
-		PageInfo<Paper> pageInfo = paperService.findAllPage(paper, page, 5);
+		PageInfo<Paper> pageInfo = paperService.findByPage(page, 5);
 		List<Paper> dataList = pageInfo.getList();
 //		List<Paper> dataList = paperService.find(paper);
-		/*for(Paper g : dataList){
+		*//*for(Paper g : dataList){
 			String courseName= "";
 			String id = g.getCourseId();
 			if(id != null){
@@ -88,11 +88,11 @@ public class PaperController {
 				str = courseName;
 			}
 			g.setCourseId(str);
-		}*/
+		}*//*
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return dataList;			
-	}
+	}*/
 	
 	/**
 	 * 跳转到新增试卷页面

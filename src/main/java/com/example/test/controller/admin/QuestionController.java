@@ -1,7 +1,9 @@
 package com.example.test.controller.admin;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,13 +82,12 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/toAddQuestion.action")
-	public String toAddQuestion(Model model, HttpSession session){
+	public List<Question> toAddQuestion(Question question,Model model, HttpSession session){
 		//获取问题信息
 		List<Question> dataList = questionService.find();
-		//获取题型信息
 //		model.addAttribute("type", typeService.find(new Type()));
 		model.addAttribute("dataList", dataList);
-		return "/admin/question-reg.jsp";			
+		return dataList;
 	}
 	
 	/**
@@ -96,9 +97,17 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/addQuesInfo.action")
-	public String addQuesInfo(Question question, Model model){
+	public String addQuesInfo(Question question, Model model, HttpServletResponse response) throws IOException {
+		//TODO 首先插入答案
+
+		Question que = new Question();
+		// = questionService.get(que.getQuestionId())
+		if(que!=null) {
+			response.sendRedirect("redirect:/toQuestionPage.action");
+			return "成功";
+		}
 		questionService.insert(question);
-		return "redirect:/toQuestionPage.action";			
+		return "失败";
 	}
 	
 	/**
