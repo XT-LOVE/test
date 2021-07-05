@@ -20,24 +20,24 @@ import com.example.test.service.QuestionService;
  * 题库管理
  *
  */
-@Controller
-@Repository
+//@Controller
+//@Repository
+	@RestController
 public class QuestionController extends BaseController {
 
 	@Autowired
 	QuestionService questionService;
 	/**
 	 * 跳转到题库管理页面
-	 * @param question
 	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/toQuestionPage.action")
 	public String toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
-			Question question, Model model, HttpSession session){
+			Model model, HttpSession session){
 //		List<Question> dataList = questionService.find(question);
-		PageInfo<Question> pageInfo = questionService.findByPage(question, page, 5);
+		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
 		List<Question> dataList = pageInfo.getList();
 //		Type type=null;
 //		String type;
@@ -57,16 +57,15 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * 跳转到题库管理页面
-	 * @param question
 	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/quesPage.action")
 	public List<Question> quesPage(@RequestParam(value="page", defaultValue="1") int page,
-			Question question,Model model, HttpSession session){
+			Model model, HttpSession session){
 //		List<Question> dataList = questionService.find(question);
-		PageInfo<Question> pageInfo = questionService.findByPage(question, page, 5);
+		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
 		List<Question> dataList = pageInfo.getList();
 //		Type type=null;
 //		for(Question que : dataList){
@@ -98,15 +97,14 @@ public class QuestionController extends BaseController {
 	} 
 	/**
 	 * 跳转到添加试题信息页面
-	 * @param question
 	 * @param model
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/toAddQuestion.action")
-	public String toAddQuestion(Question question, Model model, HttpSession session){
+	public String toAddQuestion(Model model, HttpSession session){
 		//获取问题信息
-		List<Question> dataList = questionService.find(question);
+		List<Question> dataList = questionService.find();
 		//获取题型信息
 //		model.addAttribute("type", typeService.find(new Type()));
 		model.addAttribute("dataList", dataList);
@@ -138,6 +136,7 @@ public class QuestionController extends BaseController {
 //		Type type = typeService.get(Integer.parseInt(questionInfo.getTypeId()));
 //		questionInfo.setTypeId(type.getTypeName());
 		model.addAttribute("question", questionInfo);
+		System.out.println(questionInfo);
 		return questionInfo;
 	}
 	
