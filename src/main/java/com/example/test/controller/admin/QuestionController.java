@@ -34,10 +34,11 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/toQuestionPage.action")
-	public String toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
+	public PageInfo<Question> toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
 			Model model, HttpSession session){
-//		List<Question> dataList = questionService.find(question);
+//		List<Question> dataList = questionService.find();
 		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
+//		PageInfo<Video> pageInfo = new PageInfo<>(list);
 		List<Question> dataList = pageInfo.getList();
 //		Type type=null;
 //		String type;
@@ -52,7 +53,7 @@ public class QuestionController extends BaseController {
 //		}
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
-		return "/admin/question-mgt.jsp";			
+		return pageInfo;
 	}
 	
 	/**

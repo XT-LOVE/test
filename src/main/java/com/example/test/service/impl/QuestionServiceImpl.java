@@ -49,8 +49,8 @@ public class QuestionServiceImpl implements QuestionService {
 	    List<Question> list = questionDao.find();
 	    System.out.println(list.toString());
 	    //用PageInfo对结果进行包装
-	    PageInfo<Question> page = new PageInfo<Question>(list);
-	    return page;
+		PageInfo<Question> pageInfo = new PageInfo<>(list);
+	    return pageInfo;
 	}
 
 }
