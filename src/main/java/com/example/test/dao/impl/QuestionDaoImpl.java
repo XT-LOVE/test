@@ -9,7 +9,7 @@ import com.example.test.entity.Question;
 @Repository
 public class QuestionDaoImpl extends BaseDaoImpl< Question> implements QuestionDao {
 	public QuestionDaoImpl() {
-		this.setNs("com.example.test.mapper.QuestionMapper.");
+		this.setNs("com.example.test.dao.QuestionDao.");
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import com.example.test.entity.Paper;
 @Repository
 public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 	public PaperDaoImpl() {
-		this.setNs("com.example.test.mapper.PaperMapper.");
+		this.setNs("com.example.test.dao.PaperDao.");
 	}
 
 	public List<Question> getPaperDetail(Map map) {
