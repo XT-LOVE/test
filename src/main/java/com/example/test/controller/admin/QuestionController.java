@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.example.test.entity.Answer;
+import com.example.test.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
@@ -24,11 +26,13 @@ import com.example.test.service.QuestionService;
  */
 //@Controller
 //@Repository
-	@RestController
+@RestController
 public class QuestionController extends BaseController {
 
 	@Autowired
 	QuestionService questionService;
+	@Autowired
+	AnswerService answerService;
 	/**
 	 * 跳转到题库管理页面
 	 * @param model
@@ -66,48 +70,47 @@ public class QuestionController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/deleteQuestion.action")
-	public String deleteQuestion(String questionId, Model model){
+	public void deleteQuestion(String questionId, Model model){
 		if(questionId != null){
 			String ids[] = questionId.split(",");
 			for(int i=0;i<ids.length;i++){
 				questionService.delete(Integer.parseInt(ids[i]));
 			}
 		}
-		return "redirect:/toQuestionPage.action";
+		return;
 	} 
 	/**
 	 * 跳转到添加试题信息页面
 	 * @param model
 	 * @param session
 	 * @return
-	 */
+	 *//*
 	@RequestMapping("/toAddQuestion.action")
-	public List<Question> toAddQuestion(Question question,Model model, HttpSession session){
+	public List<Question> toAddQuestion(Model model, HttpSession session){
 		//获取问题信息
 		List<Question> dataList = questionService.find();
 //		model.addAttribute("type", typeService.find(new Type()));
 		model.addAttribute("dataList", dataList);
 		return dataList;
-	}
+	}*/
 	
 	/**
 	 * 添加试题信息
-	 * @param question
+	 * @param qandA 包装类：Question和Answer
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("/addQuesInfo.action")
-	public String addQuesInfo(Question question, Model model, HttpServletResponse response) throws IOException {
-		//TODO 首先插入答案
-
-		Question que = new Question();
-		// = questionService.get(que.getQuestionId())
-		if(que!=null) {
-			response.sendRedirect("/toQuestionPage.action");
-			return "成功";
-		}
-		questionService.insert(question);
-		return "失败";
+	public Integer addQuesInfo(@RequestBody QandA qandA, Model model) throws IOException {
+//		System.out.println(qandA.answer+"\n"+qandA.question);
+		//插入答案
+		answerService.insert(qandA.answer);
+		qandA.question.setAnswerId(qandA.answer.getAnswerId());
+		System.out.println(qandA.question);
+		questionService.insert(qandA.question);
+		model.addAttribute("question", qandA.question);
+		model.addAttribute("answer", qandA.answer);
+		return qandA.question.getQuestionId();
 	}
 	
 	/**
@@ -117,8 +120,8 @@ public class QuestionController extends BaseController {
 	 * @param session session
 	 * @return return
 	 */
-	@RequestMapping(value = "/toQryQuestion/{id}", method = RequestMethod.GET)
-	public Question toQryQuestion(@PathVariable("id") int questionId, Model model, HttpSession session){
+	@RequestMapping(value = "/toQryQuestion", method = RequestMethod.GET)
+	public Question toQryQuestion(int questionId, Model model, HttpSession session){
 		Question questionInfo = questionService.get(questionId);
 //		Type type = typeService.get(Integer.parseInt(questionInfo.getTypeId()));
 //		questionInfo.setTypeId(type.getTypeName());
@@ -168,4 +171,8 @@ public class QuestionController extends BaseController {
 		questionService.delete(questionId);
 		return "redirect:/todelQuestionPage.action";			
 	}
+}
+class QandA{
+	public Question question;
+	public Answer answer;
 }
