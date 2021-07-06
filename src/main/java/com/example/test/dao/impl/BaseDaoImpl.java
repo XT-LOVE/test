@@ -38,12 +38,12 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 		this.getSqlSession().insert(ns + "insert", entity);
 	}
     @Override
-	public void update(T entity) {
-		this.getSqlSession().update(ns + "update", entity);
+	public int update(T entity) {
+		return this.getSqlSession().update(ns + "update", entity);
 	}
     @Override
-	public void delete(Serializable id) {
-		this.getSqlSession().delete(ns + "delete", id);
+	public int delete(Serializable id) {
+		return this.getSqlSession().delete(ns + "delete", id);
 	}
     @Override
 	public void delete(Serializable[] ids) {

@@ -8,7 +8,7 @@ public interface AnswerService {
     public List<Answer> find();
     public Answer get(Serializable id);
     public void insert(Answer answer);
-    public void update(Answer answer);
+    public int update(Answer answer);
     public void delete(Serializable id);
     public void delete(Serializable[] ids);
     public Answer getByDetail(String detail);

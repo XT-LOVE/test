@@ -29,12 +29,12 @@ public class QuestionServiceImpl implements QuestionService {
 		questionDao.insert(question);
 	}
 
-	public void update(Question question) {
-		questionDao.update(question);
+	public int update(Question question) {
+		return questionDao.update(question);
 	}
 
-	public void delete(int id) {
-		questionDao.delete(id);
+	public int delete(int id) {
+		return questionDao.delete(id);
 	}
 	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif){
 		return  questionDao.createPaper(ch_no,type,paperDif);

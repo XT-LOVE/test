@@ -30,8 +30,8 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public void update(Answer answer) {
-        answerDao.update(answer);
+    public int update(Answer answer) {
+        return answerDao.update(answer);
     }
 
     @Override
