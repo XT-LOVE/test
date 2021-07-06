@@ -11,4 +11,5 @@ public interface AnswerService {
     public void update(Answer answer);
     public void delete(Serializable id);
     public void delete(Serializable[] ids);
+    public Answer getByDetail(String detail);
 }

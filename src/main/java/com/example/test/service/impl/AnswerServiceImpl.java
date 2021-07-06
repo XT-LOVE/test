@@ -43,4 +43,9 @@ public class AnswerServiceImpl implements AnswerService {
     public void delete(Serializable[] ids) {
         answerDao.delete(ids);
     }
+
+    @Override
+    public Answer getByDetail(String detail) {
+        return answerDao.getByDetail(detail);
+    }
 }
