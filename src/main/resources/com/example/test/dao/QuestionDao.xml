@@ -18,6 +18,9 @@
 
     <!-- 新增 -->
     <insert id="insert" parameterType="com.example.test.entity.Question">
+        <selectKey keyProperty="questionId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into problem
         (pro_detail, pro_ansno, pro_keyw, pro_dif, char_no, char_title, char_mpoint, pro_type)
         values
