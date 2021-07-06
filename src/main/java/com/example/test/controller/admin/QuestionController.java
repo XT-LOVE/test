@@ -35,28 +35,15 @@ public class QuestionController extends BaseController {
 	AnswerService answerService;
 	/**
 	 * 跳转到题库管理页面
-	 * @param model
-	 * @param session
-	 * @return
+	 * @param model  model
+	 * @param session session
+	 * @return PageInfo<Question>
 	 */
-	@RequestMapping("/toQuestionPage.action")
+	@RequestMapping("/toQuestionPage")
 	public PageInfo<Question> toQuestionPage(@RequestParam(value="page", defaultValue="1") int page,
 			Model model, HttpSession session){
-//		List<Question> dataList = questionService.find();
 		PageInfo<Question> pageInfo = questionService.findByPage(page, 5);
-//		PageInfo<Video> pageInfo = new PageInfo<>(list);
 		List<Question> dataList = pageInfo.getList();
-//		Type type=null;
-//		String type;
-//		for(Question que : dataList){
-//			String courseName= "";
-//			String typeName="";
-////			type = typeService.get(Integer.parseInt(que.getTypeId()));
-//			type = que.getQuestionType();
-//			typeName=type.getTypeName();
-//			que.setCourseId(courseName);
-//			que.setTypeId(typeName);
-//		}
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
 		return pageInfo;
@@ -65,43 +52,35 @@ public class QuestionController extends BaseController {
 	
 	/**
 	 * 删除问题信息
-	 * @param questionId	问题编号，删除多个是，id用逗号分隔开
-	 * @param model
-	 * @return
+	 * @param questionId	问题编号，删除多个，id用逗号分隔开
+	 * @param model model
+	 * @return 提示
 	 */
-	@RequestMapping("/deleteQuestion.action")
-	public void deleteQuestion(String questionId, Model model){
+	@RequestMapping("/deleteQuestion")
+	public String deleteQuestion(String questionId, Model model){
 		if(questionId != null){
-			String ids[] = questionId.split(",");
-			for(int i=0;i<ids.length;i++){
-				questionService.delete(Integer.parseInt(ids[i]));
+			int rowsDel = 0;
+			String[] ids = questionId.split(",");
+			for (String id : ids) {
+				rowsDel += questionService.delete(Integer.parseInt(id));
 			}
+			if(rowsDel != ids.length)
+				return "删除不完全";
+			else
+				return "删除成功";
 		}
-		return;
+		return "选择questionId";
 	} 
-	/**
-	 * 跳转到添加试题信息页面
-	 * @param model
-	 * @param session
-	 * @return
-	 *//*
-	@RequestMapping("/toAddQuestion.action")
-	public List<Question> toAddQuestion(Model model, HttpSession session){
-		//获取问题信息
-		List<Question> dataList = questionService.find();
-//		model.addAttribute("type", typeService.find(new Type()));
-		model.addAttribute("dataList", dataList);
-		return dataList;
-	}*/
+
 	
 	/**
 	 * 添加试题信息
 	 * @param qandA 包装类：Question和Answer
-	 * @param model
-	 * @return
+	 * @param model model
+	 * @return questionId
 	 */
-	@RequestMapping("/addQuesInfo.action")
-	public Integer addQuesInfo(@RequestBody QandA qandA, Model model) throws IOException {
+	@RequestMapping("/addQuesInfo")
+	public Integer addQuesInfo(@RequestBody QandA qandA, Model model){
 //		System.out.println(qandA.answer+"\n"+qandA.question);
 		//插入答案
 		answerService.insert(qandA.answer);
@@ -131,45 +110,37 @@ public class QuestionController extends BaseController {
 	}
 	
 	/**
-	 * 跳转到更新题目信息页面
-	 * //@param type
-	 * @param model model
-	 * @param session session
-	 * @return
-	 */
-	@RequestMapping("/toUpdQuestion.action")
-	public String toUpdQuestion(int questionId, Model model, HttpSession session){
-		Question questionInfo = questionService.get(questionId);
-		model.addAttribute("question", questionInfo);
-//		List<Type> typeList = typeService.find(new Type());
-//		model.addAttribute("typeList", typeList);
-		return "/admin/question-upd.jsp";			
-	}
-	
-	/**
 	 * 更新题目信息
-	 * //@param type
+	 * @Param qandA
 	 * @param model model
 	 * @param session session
-	 * @return
+	 * @return String
 	 */
-	@RequestMapping("/updQuestion.action")
-	public String updQuestion(Question question, Model model, HttpSession session){
-		questionService.update(question);
-		return "redirect:/toQuestionPage.action";			
+	@RequestMapping("/updQuestion")
+	public String updQuestion(@RequestBody QandA qandA, Model model, HttpSession session){
+		Question question = questionService.get(qandA.question.getQuestionId());
+		qandA.answer.setAnswerId(question.getAnswerId());
+		System.out.println(qandA.answer);
+		int arowInSet = answerService.update(qandA.answer);
+		int qrowInSet = questionService.update(qandA.question);
+		if(qrowInSet != 1 && arowInSet != 1){
+			return "更新失败";
+		}
+		return "更新成功";
 	}
 	
 	/**
 	 * 删除问题信息
-	 * //@param type
 	 * @param model model
 	 * @param session session
-	 * @return
+	 * @return String
 	 */
-	@RequestMapping("/delQuestion.action")
+	@RequestMapping("/delQuestion")
 	public String delQuestion(int questionId, Model model, HttpSession session){
-		questionService.delete(questionId);
-		return "redirect:/todelQuestionPage.action";			
+		int rowDel = questionService.delete(questionId);
+		if(rowDel != 1)
+			return "删除失败";
+		return "删除成功";
 	}
 }
 class QandA{
