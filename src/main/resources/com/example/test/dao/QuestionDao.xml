@@ -34,9 +34,6 @@
             <if test="quesDetail!=null">
                 pro_detail=#{quesDetail},
             </if>
-            <if test="answerId!=null">
-                pro_ansno=#{answerId},
-            </if>
             <if test="keyword!=null">
                 pro_keyw=#{keyword},
             </if>
