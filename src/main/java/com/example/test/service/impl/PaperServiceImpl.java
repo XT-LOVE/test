@@ -17,8 +17,8 @@ public class PaperServiceImpl implements PaperService {
 
 	@Autowired
 	PaperDao paperDao;
-	public List<Paper> find(Paper paper) {
-		return paperDao.find();
+	public List<Paper> find(int teacherId) {
+		return paperDao.find(teacherId);
 	}
 
 	public Paper get(Serializable id) {
@@ -64,16 +64,17 @@ public class PaperServiceImpl implements PaperService {
 	}
 
 */
-	public PageInfo<Paper> findByPage(Integer pageNo,
-			Integer pageSize) {
-		pageNo = pageNo == null?1:pageNo;
-	    pageSize = pageSize == null?10:pageSize;
-	    PageHelper.startPage(pageNo, pageSize);
-	    List<Paper> list = paperDao.find();
-	    System.out.println(list.toString());
-	    //用PageInfo对结果进行包装
-	    PageInfo<Paper> page = new PageInfo<Paper>(list);
-	    return page;
-	}
+public PageInfo<Paper> findByPage(Integer pageNo,
+									 Integer pageSize,Integer teacherId) {
+
+	pageNo = pageNo == null?1:pageNo;
+	pageSize = pageSize == null?10:pageSize;
+	PageHelper.startPage(pageNo, pageSize);
+	List<Paper> list = paperDao.find(teacherId);
+	System.out.println(list.toString());
+	//用PageInfo对结果进行包装
+	PageInfo<Paper> pageInfo = new PageInfo<>(list);
+	return pageInfo;
+}
 
 }

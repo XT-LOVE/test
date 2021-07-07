@@ -93,7 +93,7 @@
     </update>-->
 
     <!-- 查询所有记录 -->
-    <select id="find" parameterType="string" resultMap="paperRM">
+    <select id="find" parameterType="int" resultMap="paperRM">
         select * from test
         where tst_tea=#{teacherId}
     </select>

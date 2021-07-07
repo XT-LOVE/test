@@ -1,6 +1,7 @@
 package com.example.test.dao.impl;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,12 @@ public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 		this.setNs("com.example.test.dao.PaperDao.");
 	}
 
+
+	@Override
+	public List<Paper> find(int teacherId) {
+		return this.getSqlSession().selectOne(this.getNs()+"find", teacherId);
+	}
+	@Override
 	public String getProNo(Serializable paperId) {
 		return this.getSqlSession().selectOne(this.getNs()+"getPaperDetail", paperId);
 	}

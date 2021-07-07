@@ -8,7 +8,7 @@ import com.github.pagehelper.PageInfo;
 import com.example.test.entity.Paper;
 
 public interface PaperService {
-	public List<Paper> find(Paper paper);
+	public List<Paper> find(int teacherId);
 	public Paper get(Serializable id);
 	public int insert(Paper paper);
 	public void update(Paper paper);
@@ -19,5 +19,5 @@ public interface PaperService {
 	//更新试卷信息
 	//public void updatePaper(Map map);
 
-	public PageInfo<Paper> findByPage(Integer pageNo,Integer pageSize);
+	public PageInfo<Paper> findByPage(Integer pageNo,Integer pageSize,Integer teacherId);
 }
