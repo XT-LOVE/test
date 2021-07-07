@@ -2,9 +2,7 @@ package com.example.test.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
-import com.example.test.entity.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +25,8 @@ public class PaperServiceImpl implements PaperService {
 		return paperDao.get(id);
 	}
 
-	public void insert(Paper paper) {
-		paperDao.insert(paper);
+	public int insert(Paper paper) {
+		return paperDao.insert(paper);
 	}
 
 	public void update(Paper paper) {
@@ -48,15 +46,11 @@ public class PaperServiceImpl implements PaperService {
 		return paperDao.getUserPaperById(id);
 	}*/
 
-	public List<Question> getPaperDetail(Map map) {
+	public String getProNo(Serializable paperId) {
 		// TODO Auto-generated method stub
-		return paperDao.getPaperDetail(map);
+		return paperDao.getProNo(paperId);
 	}
 
-	public void updatePaper(Map map) {
-		// TODO Auto-generated method stub
-		paperDao.updatePaper(map);
-	}
 /*
 
 	public List<Paper> getUndoPaper(Map map) {
