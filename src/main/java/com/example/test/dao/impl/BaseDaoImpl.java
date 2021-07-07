@@ -34,8 +34,8 @@ public class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T>{
 		return this.getSqlSession().selectOne(ns + "get", id);
 	}
     @Override
-	public void insert(T entity) {
-		this.getSqlSession().insert(ns + "insert", entity);
+	public int insert(T entity) {
+		return this.getSqlSession().insert(ns + "insert", entity);
 	}
     @Override
 	public int update(T entity) {

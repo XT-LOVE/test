@@ -10,7 +10,7 @@ import java.util.List;
 public interface BaseDao<T> {
 	public List<T> find();
 	public T get(Serializable id);
-	public void insert(T entity);
+	public int insert(T entity);
 	public int update(T entity);
 	public int delete(Serializable id);
 	public void delete(Serializable[] ids);
