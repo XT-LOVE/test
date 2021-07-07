@@ -12,6 +12,6 @@ public interface QuestionService {
 	public void insert(Question question);
 	public int update(Question question);
 	public int delete(int id);
-	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif);
+	public List<Question> createPaper(List<String> ch_no, List<String> type, int paperDif,int problemNum);
 	public PageInfo<Question> findByPage(Integer pageNo,Integer pageSize);
 }

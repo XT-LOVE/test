@@ -75,15 +75,15 @@
     </delete>
 
     <!-- 随机生成相应数量的题目 -->
-    <select id="createPaper" resultMap="questionRM">
+    <select id="createPaper" parameterType="java.util.HashMap" resultMap="questionRM">
         select * from problem
         where char_no in
-        <foreach item="item" index="index" collection="ch_no" open="(" separator="," close=")">
-            #{item}
+        <foreach item="ch_no" index="index" collection="ch_no" open="(" separator="," close=")">
+            #{ch_no}
         </foreach>
-        and typeid in
-        <foreach item="item" index="index" collection="type" open="(" separator="," close=")">
-            #{item}
+        and pro_type in
+        <foreach item="type" index="index" collection="type" open="(" separator="," close=")">
+            #{type}
         </foreach>
         and pro_dif=#{paperDif}
         ORDER BY RAND() LIMIT #{problemNum}
