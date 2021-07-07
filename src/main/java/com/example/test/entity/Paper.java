@@ -10,7 +10,7 @@ public class Paper {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tst_no", nullable = false)
-	private String paperId;
+	private int paperId;
 	//试卷名称
 	@Column(name = "tst_name")
 	private String paperName;
@@ -28,16 +28,20 @@ public class Paper {
 	private int problemNum;
 	//试卷分数
 	@Column(name = "tst_score")
-	private String score;
-	//试卷内容
-	@OneToMany(cascade=CascadeType.DETACH,fetch=FetchType.LAZY,targetEntity=Question.class)
-	@JoinColumn(name="pro_no")
-	private List<Question> paperDetail = new ArrayList<>();
+	private int score;
+//	//试卷内容
+//	@OneToMany(cascade=CascadeType.DETACH,fetch=FetchType.LAZY,targetEntity=Question.class)
+//	@JoinColumn(name="pro_no")
+//	private List<Question> paperDetail = new ArrayList<>();
 	//试卷负责人
 	@Column(name = "tst_tea")
 	private int teacherId;
+	//问题id以逗号分隔
 	@Column(name = "pro_no")
 	private String questionId;
+	//章节，以逗号分隔
+	@Column(name = "tst_ch")
+	private String chNo;
 
 
 /*//所属章节
@@ -49,8 +53,10 @@ public class Paper {
 
 	}
 
-	public Paper(String paperId, String paperName, String createTime, String paperType, int paperDif,
-				 int problemNum, String score, List<Question> paperDetail, int teacherId) {
+	public Paper(int paperId, String paperName, String createTime,
+				 String paperType, int paperDif, int problemNum, int score,
+				 //List<Question> paperDetail,
+				 int teacherId, String questionId, String chNo) {
 		this.paperId = paperId;
 		this.paperName = paperName;
 		this.createTime = createTime;
@@ -58,16 +64,18 @@ public class Paper {
 		this.paperDif = paperDif;
 		this.problemNum = problemNum;
 		this.score = score;
-		this.paperDetail = paperDetail;
+		//this.paperDetail = paperDetail;
 		this.teacherId = teacherId;
+		this.questionId = questionId;
+		this.chNo = chNo;
 	}
 
 	//getter and setter
-	public String getPaperId() {
+	public int getPaperId() {
 		return paperId;
 	}
 
-	public void setPaperId(String paperId) {
+	public void setPaperId(int paperId) {
 		this.paperId = paperId;
 	}
 
@@ -111,21 +119,21 @@ public class Paper {
 		this.problemNum = problemNum;
 	}
 
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
 
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
 
-	public List<Question> getPaperDetail() {
-		return paperDetail;
-	}
-
-	public void setPaperDetail(List<Question> paperDetail) {
-		this.paperDetail = paperDetail;
-	}
+//	public List<Question> getPaperDetail() {
+//		return paperDetail;
+//	}
+//
+//	public void setPaperDetail(List<Question> paperDetail) {
+//		this.paperDetail = paperDetail;
+//	}
 
 	public int getTeacherId() {
 		return teacherId;
@@ -134,13 +142,7 @@ public class Paper {
 	public void setTeacherId(int teacherId) {
 		this.teacherId = teacherId;
 	}
-	/*public int getCh() {
-            return ch;
-        }
 
-        public void setCh(int ch) {
-            this.ch = ch;
-        }*/
 	public String getQuestionId() {
 		return questionId;
 	}
@@ -148,6 +150,15 @@ public class Paper {
 	public void setQuestionId(String questionId) {
 		this.questionId = questionId;
 	}
+
+	public String getChNo() {
+		return chNo;
+	}
+
+	public void setChNo(String chNo) {
+		this.chNo = chNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Paper{" +
@@ -158,8 +169,10 @@ public class Paper {
 				", paperDif=" + paperDif +
 				", problemNum=" + problemNum +
 				", score='" + score + '\'' +
-				", paperDetail='" + paperDetail + '\'' +
+				//", paperDetail=" + paperDetail +
 				", teacherId=" + teacherId +
+				", questionId='" + questionId + '\'' +
+				", chNo='" + chNo + '\'' +
 				'}';
 	}
 }
