@@ -1,9 +1,7 @@
 package com.example.test.dao.impl;
 
-import java.util.List;
-import java.util.Map;
+import java.io.Serializable;
 
-import com.example.test.entity.Question;
 import org.springframework.stereotype.Repository;
 
 import com.example.test.dao.PaperDao;
@@ -14,11 +12,11 @@ public class PaperDaoImpl extends BaseDaoImpl<Paper> implements PaperDao{
 		this.setNs("com.example.test.dao.PaperDao.");
 	}
 
-	public List<Question> getPaperDetail(Map map) {
-		return this.getSqlSession().selectOne(this.getNs()+"getPaperDetail", map);
+	public String getProNo(Serializable paperId) {
+		return this.getSqlSession().selectOne(this.getNs()+"getPaperDetail", paperId);
 	}
 
-	public void updatePaper(Map map) {
-		this.getSqlSession().selectOne(this.getNs() + "updatePaper", map);
-	}
+//	public void updatePaper(Map map) {
+//		this.getSqlSession().selectOne(this.getNs() + "updatePaper", map);
+//	}
 }
