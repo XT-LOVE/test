@@ -34,13 +34,14 @@ public class PaperController {
 	 * @return
 	 */
 	@RequestMapping("/toPaperPage")
-	public PageInfo<Paper> toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
-			Model model, HttpSession session){
-		PageInfo<Paper> pageInfo = paperService.findByPage(page, 5);
+	public List<Paper> toPaperPage(@RequestParam(value="page", defaultValue="1") int page,
+								   @RequestParam(value = "teacherId") int teacherId,
+								   Model model, HttpSession session){
+		PageInfo<Paper> pageInfo = paperService.findByPage(page, 5,teacherId);
 		List<Paper> dataList = pageInfo.getList();
 		model.addAttribute("dataList", dataList);
 		model.addAttribute("pageInfo", pageInfo);
-		return pageInfo;
+		return dataList;
 	}
 
 	
@@ -79,7 +80,6 @@ public class PaperController {
 		paper.setScore(score);
 //		System.out.println(paper);
 		paperService.insert(paper);
-		//response.sendRedirect("/toPaperPage");
 //		System.out.println(paper);
 		return String.valueOf(paper.getPaperId());
 	}
