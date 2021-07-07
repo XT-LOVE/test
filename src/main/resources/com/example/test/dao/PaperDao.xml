@@ -15,15 +15,19 @@
         <result property="score" column="tst_score"/>
         <result property="teacherId" column="tst_tea"/>
         <result property="questionId" column="pro_no"/>
+        <result property="chNo" column="tst_ch"/>
     </resultMap>
 
     <!-- 新增 -->
     <insert id="insert" parameterType="com.example.test.entity.Paper">
+        <selectKey keyProperty="paperId" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
         insert into test
-        (tst_name, tst_time, tst_type, tst_dif, tst_num, tst_score, tst_tea, pro_no)
+        (tst_name, tst_time, tst_type, tst_dif, tst_num, tst_score, tst_tea, pro_no,tst_ch)
         values
         (#{paperName},#{createTime},#{paperType},
-        #{paperDif},#{problemNum},#{score}, #{teacherId},#{questionId})
+        #{paperDif},#{problemNum},#{score}, #{teacherId},#{questionId},#{chNo})
     </insert>
 
     <!-- 修改 -->
@@ -48,17 +52,18 @@
             <if test="score!=null">
                 tst_score=#{score},
             </if>
-            <if test="teacherId!=null">
-                tst_tea=#{teacherId},
-            </if>
             <if test="questionId!=null">
                 pro_no=#{questionId}
             </if>
+            <if test="chno!=null">
+                tst_ch=#{chno}
+            </if>
         </set>
-        where tst_no=#{paperId}
+        where tst_tea=#{teacherId}
+        and tst_no=#{paperId}
     </update>
 
-    <update id="updatePaper">
+    <!--<update id="updatePaper">
         update t_paper
         <set>
             <if test="paperName!=null">
@@ -85,12 +90,12 @@
         </set>
         where tst_no=#{paperId}
         and tst_tea=#{teacherId}
-    </update>
+    </update>-->
 
     <!-- 查询所有记录 -->
     <select id="find" parameterType="string" resultMap="paperRM">
         select * from test
-        where 1=1
+        where tst_tea=#{teacherId}
     </select>
 
     <!-- 查询一个记录 -->
@@ -98,8 +103,8 @@
         select * from test
         where tst_no=#{paperId}
     </select>
-    <select id="getPaperDetail" resultType="com.example.test.entity.Question">
-        select * from tst_pro
+    <select id="getProNo" parameterType="string" resultType="java.lang.String">
+        select pro_no from test
         where tst_no=#{paperId}
     </select>
 
