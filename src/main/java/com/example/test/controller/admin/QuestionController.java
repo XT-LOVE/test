@@ -120,7 +120,6 @@ public class QuestionController extends BaseController {
 	public String updQuestion(@RequestBody QandA qandA, Model model, HttpSession session){
 		Question question = questionService.get(qandA.question.getQuestionId());
 		qandA.answer.setAnswerId(question.getAnswerId());
-		System.out.println(qandA.answer);
 		int arowInSet = answerService.update(qandA.answer);
 		int qrowInSet = questionService.update(qandA.question);
 		if(qrowInSet != 1 && arowInSet != 1){
